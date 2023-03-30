@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Confidential - All rights reserved - Cosmo Tech - 2023
+This document and all information contained herein is the exclusive property
+- including all intellectual property rights pertaining thereto - of
+Cosmo Tech. Any use, reproduction, translation, broadcasting,
+transmission, distribution, etc., to any person is prohibited unless it
+has been previously and specifically authorized by written means by
+Cosmo Tech. The Cosmo Tech will use any legal mean at its disposal
+to put an end to any illicit or prohibited act and obtain full
+compensation.
+-->
+<csmSor:Simulator xmlns:csmSor="http://www.cosmotech.com/csm_simulator/9.2">
+  <csmSor:Name>MyBrewery</csmSor:Name>
+  <csmSor:Version>0.1.0</csmSor:Version>
+  <csmSor:Description></csmSor:Description>
+  <csmSor:ConceptualModels>
+    <csmSor:ModelReference id="MyBrewery">
+      <csmSor:Resource>MyBrewery</csmSor:Resource>
+    </csmSor:ModelReference>
+  </csmSor:ConceptualModels>
+  <csmSor:Plugins/>
+</csmSor:Simulator>

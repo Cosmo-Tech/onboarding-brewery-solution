@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Language: XML
+  $Author:$
+  $Date:$
+  $Revision$
+  $Copyright: [2010-2017] Cosmo Tech, All Rights Reserved $
+-->
+<csm:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:doc="http://www.cosmotech.com/csm_doc/9.2" xmlns:dbk="http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" xmlns:csm="http://www.cosmotech.com/csm/9.2">
+  <csm:ModelName>MyBrewery</csm:ModelName>
+  <csm:DataType xsi:type="csm:BoolType" name="Boolean"/>
+  <csm:DataType xsi:type="csm:IntType" name="Integer" bits="32" signed="1"/>
+  <csm:DataType xsi:type="csm:FloatType" name="FloatingPoint" bits="32"/>
+  <csm:DataType xsi:type="csm:StringType" name="String"/>
+  <csm:BasicEntity name="Customer">
+    <csm:Process name="Update">
+      <csm:CPPCode><![CDATA[// Generate a random value between 1 and 10
+int test = rand()%10 + 1;
+// If the customer is not thirsty and the random value is strictly
+// greater than 5, make the customer thirsty
+if (!GetThirsty() && test > 5)
+{
+  SetThirsty(true);
+}]]></csm:CPPCode>
+    </csm:Process>
+    <csm:State xsi:type="csm:CompositeType" name="CustomerState">
+      <csm:Container>
+        <csm:Attribute name="Thirsty" modifier="Variable">
+          <csm:DataTypeReference>Boolean</csm:DataTypeReference>
+        </csm:Attribute>
+      </csm:Container>
+    </csm:State>
+  </csm:BasicEntity>
+  <csm:CompoundEntity name="Bar">
+    <csm:Process name="Serve">
+      <csm:CPPCode><![CDATA[// Iterate over all sub-entities of type BE_Customer
+csmForEachTypedSubEntity(BE_Customer, customer)
+{
+  // If the customer is thirsty and if drinks are available in stock
+  // then decrease the stock by 1 unit and make the customer not thirsty.
+  if (customer->GetThirsty() && GetStock() > 0)
+  {
+    SetStock(GetStock() - 1);
+    customer->SetThirsty(false);
+  }
+}]]></csm:CPPCode>
+    </csm:Process>
+    <csm:Process name="Restock">
+      <csm:CPPCode><![CDATA[SetStock(GetStock() + GetRestockQty());]]></csm:CPPCode>
+    </csm:Process>
+    <csm:State xsi:type="csm:CompositeType" name="BarState">
+      <csm:Container>
+        <csm:Attribute name="Stock" modifier="Variable">
+          <csm:DataTypeReference>Integer</csm:DataTypeReference>
+          <csm:DefaultValue>10</csm:DefaultValue>
+        </csm:Attribute>
+        <csm:Attribute name="RestockQty" modifier="Variable">
+          <csm:DataTypeReference>Integer</csm:DataTypeReference>
+          <csm:DefaultValue>10</csm:DefaultValue>
+        </csm:Attribute>
+      </csm:Container>
+    </csm:State>
+    <csm:Compound>
+      <csm:Environment>NoEnvironment</csm:Environment>
+      <csm:SubEntities>
+        <csm:CanBeWithin>Customer</csm:CanBeWithin>
+      </csm:SubEntities>
+    </csm:Compound>
+  </csm:CompoundEntity>
+  <csm:Environment xsi:type="csm:NoEnvironment" name="NoEnvironment"/>
+</csm:Model>
