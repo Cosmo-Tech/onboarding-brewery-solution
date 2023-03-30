@@ -29,7 +29,17 @@
           <csmSon:SimpleTask>
             <csmSon:ModelName>Model</csmSon:ModelName>
             <csmSon:Entity>MyBar</csmSon:Entity>
+            <csmSon:MesoFunction>UpdateNbThirstyCustomers</csmSon:MesoFunction>
+          </csmSon:SimpleTask>
+          <csmSon:SimpleTask>
+            <csmSon:ModelName>Model</csmSon:ModelName>
+            <csmSon:Entity>MyBar</csmSon:Entity>
             <csmSon:Process>Serve</csmSon:Process>
+          </csmSon:SimpleTask>
+          <csmSon:SimpleTask>
+            <csmSon:ModelName>Model</csmSon:ModelName>
+            <csmSon:Entity>MyBar</csmSon:Entity>
+            <csmSon:MesoFunction>UpdateAverageSatisfaction</csmSon:MesoFunction>
           </csmSon:SimpleTask>
         </csmSon:WhileTaskBlock>
         <csmSon:SimpleTask>
@@ -47,6 +57,21 @@
         </csmSon:Entity>
       </csmSon:ProbeInstance>
       <csmSon:ProbeInstance name="StockProbe" tag="2" active="1"/>
+      <csmSon:ProbeInstance name="SatisfactionProbe" type="GenericAttributesSender" location="Simulation" loader="GenericAttributes" tag="1::1::0.6" active="1">
+        <csmSon:Entity>
+          <csmSon:Name>Model::MyBar</csmSon:Name>
+          <csmSon:SubEntityTypeName>Customer</csmSon:SubEntityTypeName>
+          <csmSon:AttributeName>Satisfaction</csmSon:AttributeName>
+        </csmSon:Entity>
+      </csmSon:ProbeInstance>
+      <csmSon:ProbeInstance name="SatisfactionProbe" tag="3" active="1"/>
+      <csmSon:ProbeInstance name="AverageSatisfactionProbe" type="GenericAttributesSender" location="Simulation" loader="GenericAttributes" tag="1::1::0.7" active="1">
+        <csmSon:Entity>
+          <csmSon:Name>Model::MyBar</csmSon:Name>
+          <csmSon:AttributeName>AverageSatisfaction</csmSon:AttributeName>
+        </csmSon:Entity>
+      </csmSon:ProbeInstance>
+      <csmSon:ProbeInstance name="AverageSatisfactionProbe" tag="4" active="1"/>
     </csmSon:ProbeInstances>
     <csmSon:ConsumerInstances>
       <csmSon:ConsumerInstance name="StockViewer" type="QtGenericChartViewerGL">
@@ -69,6 +94,49 @@
         </csmSon:Properties>
         <csmSon:ProbeReferences>
           <csmSon:ProbeReference>StockProbe</csmSon:ProbeReference>
+        </csmSon:ProbeReferences>
+      </csmSon:ConsumerInstance>
+      <csmSon:ConsumerInstance name="SatisfactionViewer" type="QtGenericChartViewerGL">
+        <csmSon:Properties>
+          <csmSon:Property name="BuildRule">SingleAttribute</csmSon:Property>
+          <csmSon:Property name="Layout">SingleGraph</csmSon:Property>
+          <csmSon:Property name="PlottingDimension">2D</csmSon:Property>
+          <csmSon:Property name="PlottingType">Curve</csmSon:Property>
+          <csmSon:Property name="Reset">false</csmSon:Property>
+          <csmSon:Property name="SelectionMode">AllEntities</csmSon:Property>
+          <csmSon:Property name="SortingAxisValue">X</csmSon:Property>
+          <csmSon:Property name="SortingByAxis">false</csmSon:Property>
+          <csmSon:Property name="UseColorScheme">false</csmSon:Property>
+          <csmSon:Property name="XDataRepresents">SimulationStep</csmSon:Property>
+          <csmSon:Property name="XFormula">x</csmSon:Property>
+          <csmSon:Property name="YAttributeReferenceType">EveryAttributes</csmSon:Property>
+          <csmSon:Property name="YDataRepresents">SimulationData</csmSon:Property>
+          <csmSon:Property name="YFormula">y</csmSon:Property>
+        </csmSon:Properties>
+        <csmSon:ProbeReferences>
+          <csmSon:ProbeReference>SatisfactionProbe</csmSon:ProbeReference>
+        </csmSon:ProbeReferences>
+      </csmSon:ConsumerInstance>
+      <csmSon:ConsumerInstance name="AverageSatisfactionViewer" type="QtGenericChartViewerGL">
+        <csmSon:Properties>
+          <csmSon:Property name="BuildRule">SingleAttribute</csmSon:Property>
+          <csmSon:Property name="Layout">SingleGraph</csmSon:Property>
+          <csmSon:Property name="PlottingDimension">2D</csmSon:Property>
+          <csmSon:Property name="PlottingType">Curve</csmSon:Property>
+          <csmSon:Property name="Reset">false</csmSon:Property>
+          <csmSon:Property name="SelectionMode">AllEntities</csmSon:Property>
+          <csmSon:Property name="SortingAxisValue">X</csmSon:Property>
+          <csmSon:Property name="SortingByAxis">false</csmSon:Property>
+          <csmSon:Property name="UseColorScheme">false</csmSon:Property>
+          <csmSon:Property name="XDataRepresents">SimulationStep</csmSon:Property>
+          <csmSon:Property name="XFormula">x</csmSon:Property>
+          <csmSon:Property name="YAttributeName">AverageSatisfaction</csmSon:Property>
+          <csmSon:Property name="YAttributeReferenceType">ByName</csmSon:Property>
+          <csmSon:Property name="YDataRepresents">SimulationData</csmSon:Property>
+          <csmSon:Property name="YFormula">y</csmSon:Property>
+        </csmSon:Properties>
+        <csmSon:ProbeReferences>
+          <csmSon:ProbeReference>AverageSatisfactionProbe</csmSon:ProbeReference>
         </csmSon:ProbeReferences>
       </csmSon:ConsumerInstance>
     </csmSon:ConsumerInstances>

@@ -15,7 +15,7 @@
   <csm:BasicEntity name="Customer">
     <csm:Process name="Update">
       <csm:CPPCode><![CDATA[// Generate a random value between 1 and 10
-int test = rand()%10 + 1;
+int test = rand()%10 + GetSatisfaction();
 // If the customer is not thirsty and the random value is strictly
 // greater than 5, make the customer thirsty
 if (!GetThirsty() && test > 5)
@@ -28,20 +28,41 @@ if (!GetThirsty() && test > 5)
         <csm:Attribute name="Thirsty" modifier="Variable">
           <csm:DataTypeReference>Boolean</csm:DataTypeReference>
         </csm:Attribute>
+        <csm:Attribute name="Satisfaction" modifier="Variable">
+          <csm:DataTypeReference>Integer</csm:DataTypeReference>
+        </csm:Attribute>
       </csm:Container>
     </csm:State>
   </csm:BasicEntity>
   <csm:CompoundEntity name="Bar">
     <csm:Process name="Serve">
-      <csm:CPPCode><![CDATA[// Iterate over all sub-entities of type BE_Customer
+      <csm:CPPCode><![CDATA[// threshold value representing the level of business of the bar waiters
+int thirsty = GetNbThirstyCustomers();
+int waiters = GetNbWaiters();
+int threshold = int(10.f * float(waiters) / float(csm::Math::Max(thirsty, 1)));
+
+// Iterate over all sub-entities of type BE_Customer
 csmForEachTypedSubEntity(BE_Customer, customer)
 {
-  // If the customer is thirsty and if drinks are available in stock
+  // First check if the customer is thirsty and if drinks are available in stock
   // then decrease the stock by 1 unit and make the customer not thirsty.
-  if (customer->GetThirsty() && GetStock() > 0)
+  if (customer->GetThirsty())
   {
-    SetStock(GetStock() - 1);
-    customer->SetThirsty(false);
+    // compute test value for waiter's availability
+    int test = rand()%10 + 1;
+    // if waiter and drinks are available then decrease the stock by 1 unit,
+    // make the customer not thirsty and increase its satisfaction
+    if (test <= threshold && GetStock() > 0)
+    {
+      SetStock(GetStock() - 1);
+      customer->SetThirsty(false);
+      customer->SetSatisfaction(customer->GetSatisfaction() + 1);
+    }
+    // otherwise decrease the customer's satisfaction (it cannot be <0)
+    else if (customer->GetSatisfaction() > 0)
+    {
+      customer->SetSatisfaction(customer->GetSatisfaction() - 1);
+    }
   }
 }]]></csm:CPPCode>
     </csm:Process>
@@ -58,8 +79,34 @@ csmForEachTypedSubEntity(BE_Customer, customer)
           <csm:DataTypeReference>Integer</csm:DataTypeReference>
           <csm:DefaultValue>10</csm:DefaultValue>
         </csm:Attribute>
+        <csm:Attribute name="NbWaiters" modifier="Variable">
+          <csm:DataTypeReference>Integer</csm:DataTypeReference>
+          <csm:DefaultValue>2</csm:DefaultValue>
+        </csm:Attribute>
       </csm:Container>
     </csm:State>
+    <csm:MesoFunction name="UpdateAverageSatisfaction">
+      <csm:CPPCode><![CDATA[]]></csm:CPPCode>
+      <csm:Operations>
+        <csm:Operation xsi:type="csm:MesoAverage" target="AverageSatisfaction" subEntityAttribute="Satisfaction"/>
+      </csm:Operations>
+    </csm:MesoFunction>
+    <csm:MesoFunction name="UpdateNbThirstyCustomers">
+      <csm:CPPCode><![CDATA[]]></csm:CPPCode>
+      <csm:Operations>
+        <csm:Operation xsi:type="csm:MesoValueCount" target="NbThirstyCustomers" subEntityAttribute="Thirsty" attributeValue="true"/>
+      </csm:Operations>
+    </csm:MesoFunction>
+    <csm:MesoState xsi:type="csm:CompositeType" name="BarMesoState">
+      <csm:Container>
+        <csm:Attribute name="AverageSatisfaction" modifier="Variable">
+          <csm:DataTypeReference>FloatingPoint</csm:DataTypeReference>
+        </csm:Attribute>
+        <csm:Attribute name="NbThirstyCustomers" modifier="Variable">
+          <csm:DataTypeReference>Integer</csm:DataTypeReference>
+        </csm:Attribute>
+      </csm:Container>
+    </csm:MesoState>
     <csm:Compound>
       <csm:Environment>NoEnvironment</csm:Environment>
       <csm:SubEntities>
