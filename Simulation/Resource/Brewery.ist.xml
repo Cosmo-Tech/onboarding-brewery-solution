@@ -25,22 +25,38 @@
         <csm:Vertex>3</csm:Vertex>
         <csm:Vertex>4</csm:Vertex>
         <csm:Vertex>5</csm:Vertex>
-        <csm:Edge>
-          <csm:Left>2</csm:Left>
-          <csm:Right>3</csm:Right>
-        </csm:Edge>
-        <csm:Edge>
-          <csm:Left>2</csm:Left>
-          <csm:Right>4</csm:Right>
-        </csm:Edge>
-        <csm:Edge>
-          <csm:Left>4</csm:Left>
-          <csm:Right>3</csm:Right>
-        </csm:Edge>
-        <csm:Edge>
-          <csm:Left>2</csm:Left>
-          <csm:Right>5</csm:Right>
-        </csm:Edge>
+        <csm:Arc>
+          <csm:Source>2</csm:Source>
+          <csm:Destination>3</csm:Destination>
+        </csm:Arc>
+        <csm:Arc>
+          <csm:Source>3</csm:Source>
+          <csm:Destination>2</csm:Destination>
+        </csm:Arc>
+        <csm:Arc>
+          <csm:Source>2</csm:Source>
+          <csm:Destination>4</csm:Destination>
+        </csm:Arc>
+        <csm:Arc>
+          <csm:Source>4</csm:Source>
+          <csm:Destination>2</csm:Destination>
+        </csm:Arc>
+        <csm:Arc>
+          <csm:Source>4</csm:Source>
+          <csm:Destination>3</csm:Destination>
+        </csm:Arc>
+        <csm:Arc>
+          <csm:Source>3</csm:Source>
+          <csm:Destination>4</csm:Destination>
+        </csm:Arc>
+        <csm:Arc>
+          <csm:Source>2</csm:Source>
+          <csm:Destination>5</csm:Destination>
+        </csm:Arc>
+        <csm:Arc>
+          <csm:Source>5</csm:Source>
+          <csm:Destination>2</csm:Destination>
+        </csm:Arc>
       </csm:Environment>
     </csm:Compound>
     <csm:Scheduler>

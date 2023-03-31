@@ -150,9 +150,9 @@ csmForEachTypedSubEntity(BE_Customer, customer)
   </csm:CompoundEntity>
   <csm:Environment xsi:type="csm:NoEnvironment" name="NoEnvironment"/>
   <csm:Environment xsi:type="csm:Graph" name="CustomerGraph">
-    <csm:Edge name="Satisfaction">
-      <csm:Left>Customer</csm:Left>
-      <csm:Right>Customer</csm:Right>
-    </csm:Edge>
+    <csm:Arc name="Satisfaction">
+      <csm:Source>Customer</csm:Source>
+      <csm:Destination>Customer</csm:Destination>
+    </csm:Arc>
   </csm:Environment>
 </csm:Model>
