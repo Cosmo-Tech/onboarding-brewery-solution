@@ -13,6 +13,32 @@
   <csm:DataType xsi:type="csm:FloatType" name="FloatingPoint" bits="32"/>
   <csm:DataType xsi:type="csm:StringType" name="String"/>
   <csm:BasicEntity name="Customer">
+    <csm:Rule name="Perceive">
+      <csm:CPPCode><![CDATA[int satisfaction = 0;
+int count = 0;
+// iterate over calling entity neighbors and sum their satisfaction values
+csmForEachTypedNeighbor(BE_Customer, neighbor)
+{
+  satisfaction += neighbor->GetCustomerToCustomer(this); // call the neighbor communicator
+  count++;
+}
+int avrg = int(float(satisfaction) / float(csm::Math::Max(count, 1)));
+SetSurroundingSatisfaction(avrg);]]></csm:CPPCode>
+      <csm:EnvironmentReference>CustomerGraph</csm:EnvironmentReference>
+    </csm:Rule>
+    <csm:Rule name="React">
+      <csm:CPPCode><![CDATA[int satisfaction = GetSatisfaction();
+// customer satisfaction is influenced by surrounding satisfaction
+if (satisfaction > GetSurroundingSatisfaction())
+{
+  SetSatisfaction(satisfaction - 1);
+}
+else if (satisfaction < GetSurroundingSatisfaction())
+{
+  SetSatisfaction(satisfaction + 1);
+}]]></csm:CPPCode>
+      <csm:EnvironmentReference>CustomerGraph</csm:EnvironmentReference>
+    </csm:Rule>
     <csm:Process name="Update">
       <csm:CPPCode><![CDATA[// Generate a random value between 1 and 10
 int test = rand()%10 + GetSatisfaction();
@@ -31,8 +57,16 @@ if (!GetThirsty() && test > 5)
         <csm:Attribute name="Satisfaction" modifier="Variable">
           <csm:DataTypeReference>Integer</csm:DataTypeReference>
         </csm:Attribute>
+        <csm:Attribute name="SurroundingSatisfaction" modifier="Variable">
+          <csm:DataTypeReference>FloatingPoint</csm:DataTypeReference>
+        </csm:Attribute>
       </csm:Container>
     </csm:State>
+    <csm:Communicator name="CustomerToCustomer">
+      <csm:CPPCode><![CDATA[return GetSatisfaction();]]></csm:CPPCode>
+      <csm:CommunicatedReference>Integer</csm:CommunicatedReference>
+      <csm:Destination>Customer</csm:Destination>
+    </csm:Communicator>
   </csm:BasicEntity>
   <csm:CompoundEntity name="Bar">
     <csm:Process name="Serve">
@@ -108,11 +142,17 @@ csmForEachTypedSubEntity(BE_Customer, customer)
       </csm:Container>
     </csm:MesoState>
     <csm:Compound>
-      <csm:Environment>NoEnvironment</csm:Environment>
+      <csm:Environment>CustomerGraph</csm:Environment>
       <csm:SubEntities>
         <csm:CanBeWithin>Customer</csm:CanBeWithin>
       </csm:SubEntities>
     </csm:Compound>
   </csm:CompoundEntity>
   <csm:Environment xsi:type="csm:NoEnvironment" name="NoEnvironment"/>
+  <csm:Environment xsi:type="csm:Graph" name="CustomerGraph">
+    <csm:Edge name="Satisfaction">
+      <csm:Left>Customer</csm:Left>
+      <csm:Right>Customer</csm:Right>
+    </csm:Edge>
+  </csm:Environment>
 </csm:Model>

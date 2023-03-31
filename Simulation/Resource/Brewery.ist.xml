@@ -20,9 +20,44 @@
         <csm:Customer id="4" name="Customer3"/>
         <csm:Customer id="5" name="Customer4"/>
       </csm:SubEntities>
-      <csm:Environment/>
+      <csm:Environment>
+        <csm:Vertex>2</csm:Vertex>
+        <csm:Vertex>3</csm:Vertex>
+        <csm:Vertex>4</csm:Vertex>
+        <csm:Vertex>5</csm:Vertex>
+        <csm:Edge>
+          <csm:Left>2</csm:Left>
+          <csm:Right>3</csm:Right>
+        </csm:Edge>
+        <csm:Edge>
+          <csm:Left>2</csm:Left>
+          <csm:Right>4</csm:Right>
+        </csm:Edge>
+        <csm:Edge>
+          <csm:Left>4</csm:Left>
+          <csm:Right>3</csm:Right>
+        </csm:Edge>
+        <csm:Edge>
+          <csm:Left>2</csm:Left>
+          <csm:Right>5</csm:Right>
+        </csm:Edge>
+      </csm:Environment>
     </csm:Compound>
     <csm:Scheduler>
+      <csm:ParallelTaskBlock concurrencyLevel="1">
+        <csm:ParallelTask>
+          <csm:Entity>2</csm:Entity>
+        </csm:ParallelTask>
+        <csm:ParallelTask>
+          <csm:Entity>3</csm:Entity>
+        </csm:ParallelTask>
+        <csm:ParallelTask>
+          <csm:Entity>4</csm:Entity>
+        </csm:ParallelTask>
+        <csm:ParallelTask>
+          <csm:Entity>5</csm:Entity>
+        </csm:ParallelTask>
+      </csm:ParallelTaskBlock>
       <csm:SimpleTask>
         <csm:Entity>2</csm:Entity>
         <csm:Process>Update</csm:Process>
