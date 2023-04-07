@@ -1,0 +1,499 @@
+Name,Neighbor
+Balon Greyjoy,Arya Stark
+Barristan Selmy,Arya Stark
+Brienne of Tarth,Arya Stark
+Benjen Stark,Balon Greyjoy
+Catelyn Tully,Balon Greyjoy
+Bran Stark,Balon Greyjoy
+Cersei Lannister,Balon Greyjoy
+Bronn,Barristan Selmy
+Daenerys Targaryen,Barristan Selmy
+Davos Seaworth,Barristan Selmy
+Lysa Tully,Barristan Selmy
+Eddard Stark,Benjen Stark
+Margaery Tyrell,Benjen Stark
+Edmure Tully,Benjen Stark
+Meera Reed,Benjen Stark
+Gendry,Bran Stark
+Melisandre,Bran Stark
+Gregor Clegane,Bran Stark
+Myrcella Baratheon,Bran Stark
+Hodor,Brienne of Tarth
+Olenna Redwyne,Brienne of Tarth
+Ilyn Payne,Brienne of Tarth
+Osha,Brienne of Tarth
+Jaqen H’ghar,Bronn
+Roslin Frey,Bronn
+Jaime Lannister,Bronn
+Sansa Stark,Bronn
+Jeor Mormont,Catelyn Tully
+Shae,Catelyn Tully
+Joffrey Baratheon,Catelyn Tully
+Ygritte,Catelyn Tully
+Jojen Reed,Cersei Lannister
+Talisa,Cersei Lannister
+Jon Arryn,Cersei Lannister
+Yara Greyjoy,Cersei Lannister
+Jon Snow,Daenerys Targaryen
+Jorah Mormont,Daenerys Targaryen
+Khal Drogo,Daenerys Targaryen
+Lancel Lannister,Daenerys Targaryen
+Loras Tyrell,Davos Seaworth
+Mace Tyrell,Davos Seaworth
+Mance Rayder,Davos Seaworth
+Orell,Davos Seaworth
+Petyr Baelish,Eddard Stark
+Podrick Payne,Eddard Stark
+Pycell,Eddard Stark
+Ramsay Snow,Eddard Stark
+Renly Baratheon,Edmure Tully
+Robb Stark,Edmure Tully
+Robert Baratheon,Edmure Tully
+Rickon Stark,Edmure Tully
+Roose Bolton,Gendry
+Samwell Tarly,Gendry
+Sandor Clegane,Gendry
+Stannis Baratheon,Gendry
+Theon Greyjoy,Gregor Clegane
+Tommen Baratheon,Gregor Clegane
+Tyrion Lannister,Gregor Clegane
+Tywin Lannister,Gregor Clegane
+Varys,Hodor
+Viserys Targaryen,Hodor
+Walder Frey,Hodor
+Balon Greyjoy,Hodor
+Arya Stark,Ilyn Payne
+Barristan Selmy,Ilyn Payne
+Brienne of Tarth,Ilyn Payne
+Benjen Stark,Ilyn Payne
+Catelyn Tully,Jaime Lannister
+Bran Stark,Jaime Lannister
+Cersei Lannister,Jaime Lannister
+Bronn,Jaime Lannister
+Daenerys Targaryen,Jaqen H’ghar
+Davos Seaworth,Jaqen H’ghar
+Lysa Tully,Jaqen H’ghar
+Eddard Stark,Jaqen H’ghar
+Margaery Tyrell,Jeor Mormont
+Edmure Tully,Jeor Mormont
+Meera Reed,Jeor Mormont
+Gendry,Jeor Mormont
+Melisandre,Joffrey Baratheon
+Gregor Clegane,Joffrey Baratheon
+Myrcella Baratheon,Joffrey Baratheon
+Hodor,Joffrey Baratheon
+Olenna Redwyne,Jojen Reed
+Ilyn Payne,Jojen Reed
+Osha,Jojen Reed
+Jaqen H’ghar,Jojen Reed
+Roslin Frey,Jon Arryn
+Jaime Lannister,Jon Arryn
+Sansa Stark,Jon Arryn
+Jeor Mormont,Jon Arryn
+Shae,Jon Snow
+Joffrey Baratheon,Jon Snow
+Ygritte,Jon Snow
+Jojen Reed,Jon Snow
+Talisa,Jorah Mormont
+Jon Arryn,Jorah Mormont
+Yara Greyjoy,Jorah Mormont
+Jon Snow,Jorah Mormont
+Jorah Mormont,Khal Drogo
+Lancel Lannister,Khal Drogo
+Loras Tyrell,Khal Drogo
+Mace Tyrell,Lancel Lannister
+Mance Rayder,Lancel Lannister
+Orell,Lancel Lannister
+Petyr Baelish,Lancel Lannister
+Podrick Payne,Loras Tyrell
+Pycell,Loras Tyrell
+Ramsay Snow,Loras Tyrell
+Renly Baratheon,Loras Tyrell
+Robb Stark,Lysa Tully
+Robert Baratheon,Lysa Tully
+Rickon Stark,Lysa Tully
+Roose Bolton,Lysa Tully
+Samwell Tarly,Mace Tyrell
+Sandor Clegane,Mace Tyrell
+Stannis Baratheon,Mace Tyrell
+Theon Greyjoy,Mace Tyrell
+Tommen Baratheon,Mance Rayder
+Tyrion Lannister,Mance Rayder
+Tywin Lannister,Mance Rayder
+Varys,Mance Rayder
+Viserys Targaryen,Margaery Tyrell
+Walder Frey,Margaery Tyrell
+Balon Greyjoy,Margaery Tyrell
+Arya Stark,Margaery Tyrell
+Barristan Selmy,Meera Reed
+Brienne of Tarth,Meera Reed
+Benjen Stark,Meera Reed
+Catelyn Tully,Meera Reed
+Bran Stark,Melisandre
+Cersei Lannister,Melisandre
+Bronn,Melisandre
+Daenerys Targaryen,Melisandre
+Davos Seaworth,Myrcella Baratheon
+Lysa Tully,Myrcella Baratheon
+Eddard Stark,Myrcella Baratheon
+Margaery Tyrell,Myrcella Baratheon
+Edmure Tully,Olenna Redwyne
+Meera Reed,Olenna Redwyne
+Gendry,Olenna Redwyne
+Melisandre,Olenna Redwyne
+Gregor Clegane,Orell
+Myrcella Baratheon,Orell
+Hodor,Orell
+Olenna Redwyne,Orell
+Ilyn Payne,Osha
+Jaqen H’ghar,Osha
+Roslin Frey,Osha
+Jaime Lannister,Petyr Baelish
+Sansa Stark,Petyr Baelish
+Jeor Mormont,Petyr Baelish
+Shae,Petyr Baelish
+Joffrey Baratheon,Podrick Payne
+Ygritte,Podrick Payne
+Jojen Reed,Podrick Payne
+Talisa,Podrick Payne
+Jon Arryn,Pycell
+Yara Greyjoy,Pycell
+Jon Snow,Pycell
+Jorah Mormont,Pycell
+Khal Drogo,Ramsay Snow
+Lancel Lannister,Ramsay Snow
+Loras Tyrell,Ramsay Snow
+Mace Tyrell,Ramsay Snow
+Mance Rayder,Renly Baratheon
+Orell,Renly Baratheon
+Petyr Baelish,Renly Baratheon
+Podrick Payne,Renly Baratheon
+Pycell,Rickon Stark
+Ramsay Snow,Rickon Stark
+Renly Baratheon,Rickon Stark
+Robb Stark,Rickon Stark
+Robert Baratheon,Robb Stark
+Rickon Stark,Robb Stark
+Roose Bolton,Robb Stark
+Samwell Tarly,Robb Stark
+Sandor Clegane,Robert Baratheon
+Stannis Baratheon,Robert Baratheon
+Theon Greyjoy,Robert Baratheon
+Tommen Baratheon,Robert Baratheon
+Tyrion Lannister,Roose Bolton
+Tywin Lannister,Roose Bolton
+Varys,Roose Bolton
+Viserys Targaryen,Roose Bolton
+Walder Frey,Roslin Frey
+Balon Greyjoy,Roslin Frey
+Arya Stark,Roslin Frey
+Barristan Selmy,Roslin Frey
+Brienne of Tarth,Samwell Tarly
+Benjen Stark,Samwell Tarly
+Catelyn Tully,Samwell Tarly
+Bran Stark,Samwell Tarly
+Cersei Lannister,Sandor Clegane
+Bronn,Sandor Clegane
+Daenerys Targaryen,Sandor Clegane
+Davos Seaworth,Sandor Clegane
+Lysa Tully,Sansa Stark
+Eddard Stark,Sansa Stark
+Margaery Tyrell,Sansa Stark
+Edmure Tully,Sansa Stark
+Meera Reed,Shae
+Gendry,Shae
+Melisandre,Shae
+Gregor Clegane,Shae
+Myrcella Baratheon,Stannis Baratheon
+Hodor,Stannis Baratheon
+Olenna Redwyne,Stannis Baratheon
+Ilyn Payne,Stannis Baratheon
+Osha,Talisa
+Jaqen H’ghar,Talisa
+Roslin Frey,Talisa
+Jaime Lannister,Talisa
+Sansa Stark,Theon Greyjoy
+Jeor Mormont,Theon Greyjoy
+Shae,Theon Greyjoy
+Joffrey Baratheon,Theon Greyjoy
+Ygritte,Tommen Baratheon
+Jojen Reed,Tommen Baratheon
+Talisa,Tommen Baratheon
+Jon Arryn,Tommen Baratheon
+Yara Greyjoy,Tyrion Lannister
+Jon Snow,Tyrion Lannister
+Jorah Mormont,Tyrion Lannister
+Khal Drogo,Tyrion Lannister
+Lancel Lannister,Tywin Lannister
+Loras Tyrell,Tywin Lannister
+Mace Tyrell,Tywin Lannister
+Mance Rayder,Tywin Lannister
+Orell,Varys
+Petyr Baelish,Varys
+Podrick Payne,Varys
+Pycell,Varys
+Ramsay Snow,Viserys Targaryen
+Renly Baratheon,Viserys Targaryen
+Robb Stark,Viserys Targaryen
+Robert Baratheon,Viserys Targaryen
+Rickon Stark,Walder Frey
+Roose Bolton,Walder Frey
+Samwell Tarly,Walder Frey
+Sandor Clegane,Walder Frey
+Stannis Baratheon,Yara Greyjoy
+Theon Greyjoy,Yara Greyjoy
+Tommen Baratheon,Yara Greyjoy
+Tyrion Lannister,Yara Greyjoy
+Tywin Lannister,Ygritte
+Varys,Ygritte
+Viserys Targaryen,Ygritte
+Walder Frey,Ygritte
+Arya Stark,Balon Greyjoy
+Arya Stark,Barristan Selmy
+Arya Stark,Brienne of Tarth
+Balon Greyjoy,Benjen Stark
+Balon Greyjoy,Catelyn Tully
+Balon Greyjoy,Bran Stark
+Balon Greyjoy,Cersei Lannister
+Barristan Selmy,Bronn
+Barristan Selmy,Daenerys Targaryen
+Barristan Selmy,Davos Seaworth
+Barristan Selmy,Lysa Tully
+Benjen Stark,Eddard Stark
+Benjen Stark,Margaery Tyrell
+Benjen Stark,Edmure Tully
+Benjen Stark,Meera Reed
+Bran Stark,Gendry
+Bran Stark,Melisandre
+Bran Stark,Gregor Clegane
+Bran Stark,Myrcella Baratheon
+Brienne of Tarth,Hodor
+Brienne of Tarth,Olenna Redwyne
+Brienne of Tarth,Ilyn Payne
+Brienne of Tarth,Osha
+Bronn,Jaqen H’ghar
+Bronn,Roslin Frey
+Bronn,Jaime Lannister
+Bronn,Sansa Stark
+Catelyn Tully,Jeor Mormont
+Catelyn Tully,Shae
+Catelyn Tully,Joffrey Baratheon
+Catelyn Tully,Ygritte
+Cersei Lannister,Jojen Reed
+Cersei Lannister,Talisa
+Cersei Lannister,Jon Arryn
+Cersei Lannister,Yara Greyjoy
+Daenerys Targaryen,Jon Snow
+Daenerys Targaryen,Jorah Mormont
+Daenerys Targaryen,Khal Drogo
+Daenerys Targaryen,Lancel Lannister
+Davos Seaworth,Loras Tyrell
+Davos Seaworth,Mace Tyrell
+Davos Seaworth,Mance Rayder
+Davos Seaworth,Orell
+Eddard Stark,Petyr Baelish
+Eddard Stark,Podrick Payne
+Eddard Stark,Pycell
+Eddard Stark,Ramsay Snow
+Edmure Tully,Renly Baratheon
+Edmure Tully,Robb Stark
+Edmure Tully,Robert Baratheon
+Edmure Tully,Rickon Stark
+Gendry,Roose Bolton
+Gendry,Samwell Tarly
+Gendry,Sandor Clegane
+Gendry,Stannis Baratheon
+Gregor Clegane,Theon Greyjoy
+Gregor Clegane,Tommen Baratheon
+Gregor Clegane,Tyrion Lannister
+Gregor Clegane,Tywin Lannister
+Hodor,Varys
+Hodor,Viserys Targaryen
+Hodor,Walder Frey
+Hodor,Balon Greyjoy
+Ilyn Payne,Arya Stark
+Ilyn Payne,Barristan Selmy
+Ilyn Payne,Brienne of Tarth
+Ilyn Payne,Benjen Stark
+Jaime Lannister,Catelyn Tully
+Jaime Lannister,Bran Stark
+Jaime Lannister,Cersei Lannister
+Jaime Lannister,Bronn
+Jaqen H’ghar,Daenerys Targaryen
+Jaqen H’ghar,Davos Seaworth
+Jaqen H’ghar,Lysa Tully
+Jaqen H’ghar,Eddard Stark
+Jeor Mormont,Margaery Tyrell
+Jeor Mormont,Edmure Tully
+Jeor Mormont,Meera Reed
+Jeor Mormont,Gendry
+Joffrey Baratheon,Melisandre
+Joffrey Baratheon,Gregor Clegane
+Joffrey Baratheon,Myrcella Baratheon
+Joffrey Baratheon,Hodor
+Jojen Reed,Olenna Redwyne
+Jojen Reed,Ilyn Payne
+Jojen Reed,Osha
+Jojen Reed,Jaqen H’ghar
+Jon Arryn,Roslin Frey
+Jon Arryn,Jaime Lannister
+Jon Arryn,Sansa Stark
+Jon Arryn,Jeor Mormont
+Jon Snow,Shae
+Jon Snow,Joffrey Baratheon
+Jon Snow,Ygritte
+Jon Snow,Jojen Reed
+Jorah Mormont,Talisa
+Jorah Mormont,Jon Arryn
+Jorah Mormont,Yara Greyjoy
+Jorah Mormont,Jon Snow
+Khal Drogo,Jorah Mormont
+Khal Drogo,Lancel Lannister
+Khal Drogo,Loras Tyrell
+Lancel Lannister,Mace Tyrell
+Lancel Lannister,Mance Rayder
+Lancel Lannister,Orell
+Lancel Lannister,Petyr Baelish
+Loras Tyrell,Podrick Payne
+Loras Tyrell,Pycell
+Loras Tyrell,Ramsay Snow
+Loras Tyrell,Renly Baratheon
+Lysa Tully,Robb Stark
+Lysa Tully,Robert Baratheon
+Lysa Tully,Rickon Stark
+Lysa Tully,Roose Bolton
+Mace Tyrell,Samwell Tarly
+Mace Tyrell,Sandor Clegane
+Mace Tyrell,Stannis Baratheon
+Mace Tyrell,Theon Greyjoy
+Mance Rayder,Tommen Baratheon
+Mance Rayder,Tyrion Lannister
+Mance Rayder,Tywin Lannister
+Mance Rayder,Varys
+Margaery Tyrell,Viserys Targaryen
+Margaery Tyrell,Walder Frey
+Margaery Tyrell,Balon Greyjoy
+Margaery Tyrell,Arya Stark
+Meera Reed,Barristan Selmy
+Meera Reed,Brienne of Tarth
+Meera Reed,Benjen Stark
+Meera Reed,Catelyn Tully
+Melisandre,Bran Stark
+Melisandre,Cersei Lannister
+Melisandre,Bronn
+Melisandre,Daenerys Targaryen
+Myrcella Baratheon,Davos Seaworth
+Myrcella Baratheon,Lysa Tully
+Myrcella Baratheon,Eddard Stark
+Myrcella Baratheon,Margaery Tyrell
+Olenna Redwyne,Edmure Tully
+Olenna Redwyne,Meera Reed
+Olenna Redwyne,Gendry
+Olenna Redwyne,Melisandre
+Orell,Gregor Clegane
+Orell,Myrcella Baratheon
+Orell,Hodor
+Orell,Olenna Redwyne
+Osha,Ilyn Payne
+Osha,Jaqen H’ghar
+Osha,Roslin Frey
+Petyr Baelish,Jaime Lannister
+Petyr Baelish,Sansa Stark
+Petyr Baelish,Jeor Mormont
+Petyr Baelish,Shae
+Podrick Payne,Joffrey Baratheon
+Podrick Payne,Ygritte
+Podrick Payne,Jojen Reed
+Podrick Payne,Talisa
+Pycell,Jon Arryn
+Pycell,Yara Greyjoy
+Pycell,Jon Snow
+Pycell,Jorah Mormont
+Ramsay Snow,Khal Drogo
+Ramsay Snow,Lancel Lannister
+Ramsay Snow,Loras Tyrell
+Ramsay Snow,Mace Tyrell
+Renly Baratheon,Mance Rayder
+Renly Baratheon,Orell
+Renly Baratheon,Petyr Baelish
+Renly Baratheon,Podrick Payne
+Rickon Stark,Pycell
+Rickon Stark,Ramsay Snow
+Rickon Stark,Renly Baratheon
+Rickon Stark,Robb Stark
+Robb Stark,Robert Baratheon
+Robb Stark,Rickon Stark
+Robb Stark,Roose Bolton
+Robb Stark,Samwell Tarly
+Robert Baratheon,Sandor Clegane
+Robert Baratheon,Stannis Baratheon
+Robert Baratheon,Theon Greyjoy
+Robert Baratheon,Tommen Baratheon
+Roose Bolton,Tyrion Lannister
+Roose Bolton,Tywin Lannister
+Roose Bolton,Varys
+Roose Bolton,Viserys Targaryen
+Roslin Frey,Walder Frey
+Roslin Frey,Balon Greyjoy
+Roslin Frey,Arya Stark
+Roslin Frey,Barristan Selmy
+Samwell Tarly,Brienne of Tarth
+Samwell Tarly,Benjen Stark
+Samwell Tarly,Catelyn Tully
+Samwell Tarly,Bran Stark
+Sandor Clegane,Cersei Lannister
+Sandor Clegane,Bronn
+Sandor Clegane,Daenerys Targaryen
+Sandor Clegane,Davos Seaworth
+Sansa Stark,Lysa Tully
+Sansa Stark,Eddard Stark
+Sansa Stark,Margaery Tyrell
+Sansa Stark,Edmure Tully
+Shae,Meera Reed
+Shae,Gendry
+Shae,Melisandre
+Shae,Gregor Clegane
+Stannis Baratheon,Myrcella Baratheon
+Stannis Baratheon,Hodor
+Stannis Baratheon,Olenna Redwyne
+Stannis Baratheon,Ilyn Payne
+Talisa,Osha
+Talisa,Jaqen H’ghar
+Talisa,Roslin Frey
+Talisa,Jaime Lannister
+Theon Greyjoy,Sansa Stark
+Theon Greyjoy,Jeor Mormont
+Theon Greyjoy,Shae
+Theon Greyjoy,Joffrey Baratheon
+Tommen Baratheon,Ygritte
+Tommen Baratheon,Jojen Reed
+Tommen Baratheon,Talisa
+Tommen Baratheon,Jon Arryn
+Tyrion Lannister,Yara Greyjoy
+Tyrion Lannister,Jon Snow
+Tyrion Lannister,Jorah Mormont
+Tyrion Lannister,Khal Drogo
+Tywin Lannister,Lancel Lannister
+Tywin Lannister,Loras Tyrell
+Tywin Lannister,Mace Tyrell
+Tywin Lannister,Mance Rayder
+Varys,Orell
+Varys,Petyr Baelish
+Varys,Podrick Payne
+Varys,Pycell
+Viserys Targaryen,Ramsay Snow
+Viserys Targaryen,Renly Baratheon
+Viserys Targaryen,Robb Stark
+Viserys Targaryen,Robert Baratheon
+Walder Frey,Rickon Stark
+Walder Frey,Roose Bolton
+Walder Frey,Samwell Tarly
+Walder Frey,Sandor Clegane
+Yara Greyjoy,Stannis Baratheon
+Yara Greyjoy,Theon Greyjoy
+Yara Greyjoy,Tommen Baratheon
+Yara Greyjoy,Tyrion Lannister
+Ygritte,Tywin Lannister
+Ygritte,Varys
+Ygritte,Viserys Targaryen
+Ygritte,Walder Frey

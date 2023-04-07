@@ -101,7 +101,10 @@ csmForEachTypedSubEntity(BE_Customer, customer)
 }]]></csm:CPPCode>
     </csm:Process>
     <csm:Process name="Restock">
-      <csm:CPPCode><![CDATA[SetStock(GetStock() + GetRestockQty());]]></csm:CPPCode>
+      <csm:CPPCode><![CDATA[if (GetStock() <= GetRestockThreshold())
+{
+  SetStock(GetStock() + GetRestockQty());
+}]]></csm:CPPCode>
     </csm:Process>
     <csm:State xsi:type="csm:CompositeType" name="BarState">
       <csm:Container>
@@ -116,6 +119,10 @@ csmForEachTypedSubEntity(BE_Customer, customer)
         <csm:Attribute name="NbWaiters" modifier="Variable">
           <csm:DataTypeReference>Integer</csm:DataTypeReference>
           <csm:DefaultValue>2</csm:DefaultValue>
+        </csm:Attribute>
+        <csm:Attribute name="RestockThreshold" modifier="Variable">
+          <csm:DataTypeReference>Integer</csm:DataTypeReference>
+          <csm:DefaultValue>5</csm:DefaultValue>
         </csm:Attribute>
       </csm:Container>
     </csm:State>
