@@ -16,13 +16,15 @@
       <csmSon:Property name="DefaultReferenceId"/>
       <csmSon:Property name="DefaultType">Bar</csmSon:Property>
       <csmSon:Property name="FieldSeparator">,</csmSon:Property>
-      <csmSon:Property name="File">Bar.csv</csmSon:Property>
+      <csmSon:Property name="File">scenariorun-data/Bar.csv</csmSon:Property>
       <csmSon:Property name="IgnoreMissingFile">0</csmSon:Property>
       <csmSon:Property name="NullValues">[]</csmSon:Property>
-      <csmSon:Property name="Query">id as @ReferenceName,
-NbWaiters,
-RestockQty,
-Stock</csmSon:Property>
+      <csmSon:Property name="Query">
+        id as @ReferenceName,
+        NbWaiters,
+        RestockQty,
+        Stock
+      </csmSon:Property>
       <csmSon:Property name="StealRootLink">0</csmSon:Property>
       <csmSon:Property name="StringDelimiter">"</csmSon:Property>
     </csmSon:Loader>
@@ -30,7 +32,7 @@ Stock</csmSon:Property>
       <csmSon:Property name="DefaultReferenceId"/>
       <csmSon:Property name="DefaultType">Customer</csmSon:Property>
       <csmSon:Property name="FieldSeparator">,</csmSon:Property>
-      <csmSon:Property name="File">Customer.csv</csmSon:Property>
+      <csmSon:Property name="File">scenariorun-data/Customer.csv</csmSon:Property>
       <csmSon:Property name="IgnoreMissingFile">0</csmSon:Property>
       <csmSon:Property name="NullValues">[]</csmSon:Property>
       <csmSon:Property name="Query">Name as @Name,
@@ -44,7 +46,7 @@ Stock</csmSon:Property>
       <csmSon:Property name="DefaultReferenceId"/>
       <csmSon:Property name="DefaultType"/>
       <csmSon:Property name="FieldSeparator">,</csmSon:Property>
-      <csmSon:Property name="File">Customer.csv</csmSon:Property>
+      <csmSon:Property name="File">scenariorun-data/Customer.csv</csmSon:Property>
       <csmSon:Property name="IgnoreMissingFile">0</csmSon:Property>
       <csmSon:Property name="NullValues">[]</csmSon:Property>
       <csmSon:Property name="Query">Name as @VertexName</csmSon:Property>
@@ -55,7 +57,7 @@ Stock</csmSon:Property>
       <csmSon:Property name="DefaultReferenceId"/>
       <csmSon:Property name="DefaultType"/>
       <csmSon:Property name="FieldSeparator">,</csmSon:Property>
-      <csmSon:Property name="File">arc_to_Customer.csv</csmSon:Property>
+      <csmSon:Property name="File">scenariorun-data/arc_to_Customer.csv</csmSon:Property>
       <csmSon:Property name="IgnoreMissingFile">0</csmSon:Property>
       <csmSon:Property name="NullValues">[]</csmSon:Property>
       <csmSon:Property name="Query">source as @SourceName,
