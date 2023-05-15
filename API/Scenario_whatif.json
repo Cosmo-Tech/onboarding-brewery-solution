@@ -1,0 +1,6 @@
+{
+  "name": "Test2",
+  "description": "My beautiful new test",
+  "runTemplateId": "what_if",
+  "datasetList": ["d-eq3q130015y3l"]
+}

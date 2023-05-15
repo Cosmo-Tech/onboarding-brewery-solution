@@ -1,0 +1,59 @@
+# Basic info about the solution
+key: "brewery"
+name: "Demo Brewery Solution, walkthrough version"
+description: "A simple example of a Cosmo Tech solution built using the Brewery model"
+tags:
+  - "walkthrough"
+  - "Brewery"
+  - "CoMETS"
+# Where the simulator is found
+repository: "mybrewery_simulator"
+version: "0.0.1"
+# Parameters that will be exposed in the front end (business web app)
+parameters:
+  - id: "stock"
+    labels:
+      fr: "Stock"
+      en: "Stock"
+    varType: "int"
+    defaultValue: 100
+  - id: "restock_quantity"
+    labels:
+      fr: "Réapprovisionnement"
+      en: "Restock"
+    varType: "int"
+    defaultValue: 25
+  - id: "num_waiters"
+    labels:
+      fr: "Serveurs"
+      en: "Waiters"
+    varType: "int"
+    defaultValue: 5
+# Parameter groups: presently we have just a single one
+parameterGroups:
+  - id: bar_parameters
+    labels:
+      fr: Bar
+      en: Bar
+    parameters:
+      - stock
+      - restock_quantity
+      - num_waiters
+# Run templates
+runTemplates:
+  # First run template
+  - id: "what_if"
+    name: "Basic what-if run type"
+    description: "Basic what-if run type with a default Run step."
+    tags:
+      - "basic_simulation"
+      - "CoMETS"
+    parameterGroups:
+      - bar_parameters
+    # Run cycle steps and related settings
+    fetchDatasets: true
+    fetchScenarioParameters: true
+    applyParameters: true
+    parametersJson: true
+    parametersHandlerSource: local
+    csmSimulation: BusinessApp_Simulation

@@ -1,0 +1,20 @@
+[
+  {
+    "parameterId": "stock",
+    "value": "30",
+    "varType": "int",
+    "isInherited": false
+  },
+  {
+    "parameterId": "restock_quantity",
+    "value": "15",
+    "varType": "int",
+    "isInherited": false
+  },
+  {
+    "parameterId": "num_waiters",
+    "value": "3",
+    "varType": "int",
+    "isInherited": false
+  }
+]
