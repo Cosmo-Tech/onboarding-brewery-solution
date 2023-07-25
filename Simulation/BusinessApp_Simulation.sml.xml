@@ -6,7 +6,7 @@
   $Revision$
   $Copyright: [2010-2017] Cosmo Tech, All Rights Reserved $
 -->
-<csmSon:Simulation xmlns:csmSon="http://www.cosmotech.com/csm_simulation/9.3">
+<csmSon:Simulation xmlns:csmSon="http://www.cosmotech.com/csm_simulation/9.4">
   <csmSon:Documentation/>
   <csmSon:ModelInstance type="MyBrewery" id="Model">
     <csmSon:Loader type="csmXMLInstantiation">
@@ -93,16 +93,54 @@
     <csmSon:ProbeInstances>
       <csmSon:ProbeInstance name="BarProbe" type="BarProbe" location="Simulation" loader="BarProbe" tag="1::0.5" active="1">
         <csmSon:BarObs>
-          <csmSon:Reference recursiveLevel="1" path="{Model}Model::{Entity}MyBar" />
+          <csmSon:Reference recursiveLevel="1" path="{Model}Model::{Entity}MyBar"/>
         </csmSon:BarObs>
       </csmSon:ProbeInstance>
       <csmSon:ProbeInstance name="BarProbe" tag="2" active="1"/>
       <csmSon:ProbeInstance name="CustomerProbe" type="CustomerProbe" location="Simulation" loader="CustomerProbe" tag="1::0.6" active="1">
         <csmSon:CustomerObs>
-          <csmSon:Reference recursiveLevel="1" path="{Model}Model::{Entity}MyBar" />
+          <csmSon:Reference recursiveLevel="1" path="{Model}Model::{Entity}MyBar"/>
         </csmSon:CustomerObs>
       </csmSon:ProbeInstance>
       <csmSon:ProbeInstance name="CustomerProbe" tag="3" active="1"/>
     </csmSon:ProbeInstances>
+    <csmSon:ConsumerInstances>
+      <csmSon:ConsumerInstance name="BarConsumer" type="CSVFileGenericConsumer">
+        <csmSon:Properties>
+          <csmSon:Property name="ColumnType">attribute</csmSon:Property>
+          <csmSon:Property name="DesignateEntityByName">0</csmSon:Property>
+          <csmSon:Property name="DeterministicOutput">0</csmSon:Property>
+          <csmSon:Property name="FileName">BarProbe</csmSon:Property>
+          <csmSon:Property name="FileType">all</csmSon:Property>
+          <csmSon:Property name="HideLinkedValues">0</csmSon:Property>
+          <csmSon:Property name="LinkedValueSeparator">_</csmSon:Property>
+          <csmSon:Property name="OutputDirectory"/>
+          <csmSon:Property name="RowType">iteration</csmSon:Property>
+          <csmSon:Property name="Separator">,</csmSon:Property>
+          <csmSon:Property name="SerializeAtEachIteration">0</csmSon:Property>
+        </csmSon:Properties>
+        <csmSon:ProbeReferences>
+          <csmSon:ProbeReference>BarProbe</csmSon:ProbeReference>
+        </csmSon:ProbeReferences>
+      </csmSon:ConsumerInstance>
+      <csmSon:ConsumerInstance name="CustomerConsumer" type="CSVFileGenericConsumer">
+        <csmSon:Properties>
+          <csmSon:Property name="ColumnType">attribute</csmSon:Property>
+          <csmSon:Property name="DesignateEntityByName">0</csmSon:Property>
+          <csmSon:Property name="DeterministicOutput">0</csmSon:Property>
+          <csmSon:Property name="FileName">CustomerProbe</csmSon:Property>
+          <csmSon:Property name="FileType">all</csmSon:Property>
+          <csmSon:Property name="HideLinkedValues">0</csmSon:Property>
+          <csmSon:Property name="LinkedValueSeparator">_</csmSon:Property>
+          <csmSon:Property name="OutputDirectory"/>
+          <csmSon:Property name="RowType">iteration</csmSon:Property>
+          <csmSon:Property name="Separator">,</csmSon:Property>
+          <csmSon:Property name="SerializeAtEachIteration">0</csmSon:Property>
+        </csmSon:Properties>
+        <csmSon:ProbeReferences>
+          <csmSon:ProbeReference>CustomerProbe</csmSon:ProbeReference>
+        </csmSon:ProbeReferences>
+      </csmSon:ConsumerInstance>
+    </csmSon:ConsumerInstances>
   </csmSon:SimulatorInstance>
 </csmSon:Simulation>
