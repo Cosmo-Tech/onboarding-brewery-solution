@@ -1,0 +1,69 @@
+{
+  "steps": [
+    {
+      "id": "parameter-handler",
+      "command": "csm-orc",
+      "arguments": [
+        "run-step", "--template",
+        "what_if", "--steps",
+        "parameters_handler"
+      ],
+      "description": "Apply the \"what-if\" parameter handler",
+      "environment": {
+        "CSM_DATASET_ABSOLUTE_PATH": {
+          "description": "A folder containing our dataset"
+        },
+        "CSM_PARAMETERS_ABSOLUTE_PATH": {
+          "description": "A folder containing our parameters"
+        }
+      }
+    },
+    {
+      "id": "replace-data",
+      "command": "bash",
+      "arguments": [
+        "code/run_templates/orchestrator_tutorial/replace_scenariorun_data.sh"
+      ],
+      "description": "Replace exisiting scenariorun-data with our dataset",
+      "environment": {
+        "CSM_DATASET_ABSOLUTE_PATH": {
+          "description": "A folder containing our dataset"
+        }
+      },
+      "precedents": [
+        "parameter-handler"
+      ]
+    },
+    {
+      "id": "engine",
+      "command": "csm-orc",
+      "arguments": [
+        "run-step", "--template",
+        "what_if", "--steps",
+        "engine"
+      ],
+      "description": "Run the simulation targeted by CSM_SIMULATION",
+      "useSystemEnvironment": true,
+      "environment": {
+        "CSM_SIMULATION": {
+          "description": "The simulation file to run",
+          "defaultValue": "BusinessApp_Simulation"
+        }
+      },
+      "precedents": [
+        "replace-data"
+      ]
+    },
+    {
+      "id": "restore-data",
+      "command": "bash",
+      "arguments": [
+        "code/run_templates/orchestrator_tutorial/restore_scenariorun_data.sh"
+      ],
+      "description": "Restore scenariorun-data if it was existing before the run",
+      "precedents": [
+        "engine"
+      ]
+    }
+  ]
+}
