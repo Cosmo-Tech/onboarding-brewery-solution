@@ -1,2 +1,3 @@
 pandas
 cosmotech-run-orchestrator
+cosmotech-api==3.0.2

@@ -1,0 +1,12 @@
+{
+  "steps": [
+    {
+      "id": "ETL",
+      "command": "python",
+      "arguments": [
+        "etl.py"
+      ],
+      "useSystemEnvironment": true
+    }
+  ]
+}
