@@ -6,7 +6,7 @@
   $Revision$
   $Copyright: [2010-2017] Cosmo Tech, All Rights Reserved $
 -->
-<csm:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:doc="http://www.cosmotech.com/csm_doc/9.2" xmlns:dbk="http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" xmlns:csm="http://www.cosmotech.com/csm/9.2">
+<csm:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:doc="http://www.cosmotech.com/csm_doc/10.2" xmlns:dbk="http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" xmlns:csm="http://www.cosmotech.com/csm/10.2">
   <csm:ModelName>MyBrewery</csm:ModelName>
   <csm:DataType xsi:type="csm:BoolType" name="Boolean"/>
   <csm:DataType xsi:type="csm:IntType" name="Integer" bits="32" signed="1"/>
@@ -14,40 +14,40 @@
   <csm:DataType xsi:type="csm:StringType" name="String"/>
   <csm:BasicEntity name="Customer">
     <csm:Rule name="Perceive">
-      <csm:CPPCode><![CDATA[int satisfaction = 0;
-int count = 0;
-// iterate over calling entity neighbors and sum their satisfaction values
-csmForEachTypedNeighbor(BE_Customer, neighbor)
-{
-  satisfaction += neighbor->GetCustomerToCustomer(this); // call the neighbor communicator
-  count++;
-}
-int avrg = int(float(satisfaction) / float(csm::Math::Max(count, 1)));
-SetSurroundingSatisfaction(avrg);]]></csm:CPPCode>
+      <csm:Implementation language="python">
+        <csm:Code><![CDATA[satisfaction = 0;
+count = 0;
+# iterate over calling entity neighbors and sum their satisfaction values
+for n in GetContext().GetSchedulerEnvironment().GetNeighbors(self):
+  # call the neighbor communicator
+  satisfaction+=csm.engine.BE_Customer.Cast(n).GetCustomerToCustomer(self).Get()
+  count+=1
+avrg = satisfaction / max(count, 1)
+self.SetSurroundingSatisfaction(avrg)]]></csm:Code>
+      </csm:Implementation>
       <csm:EnvironmentReference>CustomerGraph</csm:EnvironmentReference>
     </csm:Rule>
     <csm:Rule name="React">
-      <csm:CPPCode><![CDATA[int satisfaction = GetSatisfaction();
-// customer satisfaction is influenced by surrounding satisfaction
-if (satisfaction > GetSurroundingSatisfaction())
-{
-  SetSatisfaction(satisfaction - 1);
-}
-else if (satisfaction < GetSurroundingSatisfaction())
-{
-  SetSatisfaction(satisfaction + 1);
-}]]></csm:CPPCode>
+      <csm:Implementation language="python">
+        <csm:Code><![CDATA[satisfaction = self.GetSatisfaction().Get();
+# customer satisfaction is influenced by surrounding satisfaction
+if satisfaction > self.GetSurroundingSatisfaction().Get():
+  self.SetSatisfaction(satisfaction - 1)
+elif satisfaction < self.GetSurroundingSatisfaction().Get():
+  self.SetSatisfaction(satisfaction + 1)]]></csm:Code>
+      </csm:Implementation>
       <csm:EnvironmentReference>CustomerGraph</csm:EnvironmentReference>
     </csm:Rule>
     <csm:Process name="Update">
-      <csm:CPPCode><![CDATA[// Generate a random value between 1 and 10
-int test = rand()%10 + GetSatisfaction();
-// If the customer is not thirsty and the random value is strictly
-// greater than 5, make the customer thirsty
-if (!GetThirsty() && test > 5)
-{
-  SetThirsty(true);
-}]]></csm:CPPCode>
+      <csm:Implementation language="python">
+        <csm:Code><![CDATA[import random
+# Generate a random value between 1 and 10
+test = random.randint(1, 10) + self.GetSatisfaction().Get()
+# If the customer is not thirsty and the random value is strictly
+# greater than 5, make the customer thirsty
+if not self.GetThirsty().Get() & test>5:
+  self.SetThirsty(True)]]></csm:Code>
+      </csm:Implementation>
     </csm:Process>
     <csm:State xsi:type="csm:CompositeType" name="CustomerState">
       <csm:Container>
@@ -63,48 +63,49 @@ if (!GetThirsty() && test > 5)
       </csm:Container>
     </csm:State>
     <csm:Communicator name="CustomerToCustomer">
-      <csm:CPPCode><![CDATA[return GetSatisfaction();]]></csm:CPPCode>
+      <csm:Implementation language="cpp">
+        <csm:Code><![CDATA[return GetSatisfaction();]]></csm:Code>
+      </csm:Implementation>
       <csm:CommunicatedReference>Integer</csm:CommunicatedReference>
       <csm:Destination>Customer</csm:Destination>
     </csm:Communicator>
   </csm:BasicEntity>
   <csm:CompoundEntity name="Bar">
     <csm:Process name="Serve">
-      <csm:CPPCode><![CDATA[// threshold value representing the level of business of the bar waiters
-int thirsty = GetNbThirstyCustomers();
-int waiters = GetNbWaiters();
-int threshold = int(10.f * float(waiters) / float(csm::Math::Max(thirsty, 1)));
+      <csm:Implementation language="python">
+        <csm:Code><![CDATA[
+import random
 
-// Iterate over all sub-entities of type BE_Customer
-csmForEachTypedSubEntity(BE_Customer, customer)
-{
-  // First check if the customer is thirsty and if drinks are available in stock
-  // then decrease the stock by 1 unit and make the customer not thirsty.
-  if (customer->GetThirsty())
-  {
-    // compute test value for waiter's availability
-    int test = rand()%10 + 1;
-    // if waiter and drinks are available then decrease the stock by 1 unit,
-    // make the customer not thirsty and increase its satisfaction
-    if (test <= threshold && GetStock() > 0)
-    {
-      SetStock(GetStock() - 1);
-      customer->SetThirsty(false);
-      customer->SetSatisfaction(customer->GetSatisfaction() + 1);
-    }
-    // otherwise decrease the customer's satisfaction (it cannot be <0)
-    else if (customer->GetSatisfaction() > 0)
-    {
-      customer->SetSatisfaction(customer->GetSatisfaction() - 1);
-    }
-  }
-}]]></csm:CPPCode>
+# threshold value representing the level of business of the bar waiters
+thirsty = self.GetNbThirstyCustomers().Get()
+waiters = self.GetNbWaiters().Get()
+threshold = 10 * waiters / max(thirsty, 1)
+
+# Iterate over all sub-entities of type BE_Customer
+for c in self.GetSubEntities():
+  # First check if the customer is thirsty and if drinks are available in stock
+  # then decrease the stock by 1 unit and make the customer not thirsty.
+  customer = csm.engine.BE_Customer.Cast(c)
+  if customer.GetThirsty().Get():
+    # compute test value for waiter's availability
+    test = random.randint(1, 10)
+    # if waiter and drinks are available then decrease the stock by 1 unit,
+    # make the customer not thirsty and increase its satisfaction
+    if (test <= threshold) & (self.GetStock().Get() > 0):
+      self.SetStock(self.GetStock().Get() - 1)
+      customer.SetThirsty(False)
+      customer.SetSatisfaction(customer.GetSatisfaction().Get() + 1)
+    # otherwise decrease the customer's satisfaction (it cannot be <0)
+    elif customer.GetSatisfaction().Get() > 0:
+      customer.SetSatisfaction(customer.GetSatisfaction().Get() - 1)
+]]></csm:Code>
+      </csm:Implementation>
     </csm:Process>
     <csm:Process name="Restock">
-      <csm:CPPCode><![CDATA[if (GetStock() <= GetRestockThreshold())
-{
-  SetStock(GetStock() + GetRestockQty());
-}]]></csm:CPPCode>
+      <csm:Implementation language="python">
+        <csm:Code><![CDATA[if self.GetStock().Get() <= self.GetRestockThreshold().Get():
+  self.SetStock(self.GetStock().Get() + self.GetRestockQty().Get())]]></csm:Code>
+      </csm:Implementation>
     </csm:Process>
     <csm:State xsi:type="csm:CompositeType" name="BarState">
       <csm:Container>
@@ -127,13 +128,17 @@ csmForEachTypedSubEntity(BE_Customer, customer)
       </csm:Container>
     </csm:State>
     <csm:MesoFunction name="UpdateAverageSatisfaction">
-      <csm:CPPCode><![CDATA[]]></csm:CPPCode>
+      <csm:Implementation language="cpp">
+        <csm:Code><![CDATA[]]></csm:Code>
+      </csm:Implementation>
       <csm:Operations>
         <csm:Operation xsi:type="csm:MesoAverage" target="AverageSatisfaction" subEntityAttribute="Satisfaction"/>
       </csm:Operations>
     </csm:MesoFunction>
     <csm:MesoFunction name="UpdateNbThirstyCustomers">
-      <csm:CPPCode><![CDATA[]]></csm:CPPCode>
+      <csm:Implementation language="cpp">
+        <csm:Code><![CDATA[]]></csm:Code>
+      </csm:Implementation>
       <csm:Operations>
         <csm:Operation xsi:type="csm:MesoValueCount" target="NbThirstyCustomers" subEntityAttribute="Thirsty" attributeValue="true"/>
       </csm:Operations>
