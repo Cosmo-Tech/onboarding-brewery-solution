@@ -1,0 +1,23 @@
+{
+  "steps": [
+    {
+        "id": "git-clone",
+        "command": "git",
+        "arguments": [
+            "clone",
+            "https://github.com/lalepee/demo_etl_with_git.git",
+            "myEtl"
+        ],
+        "useSystemEnvironment": true
+    },
+    {
+        "id": "ETL",
+        "command": "python",
+        "arguments": [
+            "myEtl/etl.py"
+        ],
+        "useSystemEnvironment": true,
+        "precedents": ["git-clone"]
+    }
+  ]
+}
