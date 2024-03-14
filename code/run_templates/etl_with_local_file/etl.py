@@ -2,11 +2,14 @@ import json
 import logging
 import os
 
+from zipfile import ZipFile
+import csv
+
 import cosmotech_api
 from azure.identity import DefaultAzureCredential
 from cosmotech_api.api.dataset_api import DatasetApi
-# TODO : replace ScenarioApi by RunnerApi
-from cosmotech_api.api.scenario_api import ScenarioApi
+from cosmotech_api.model.dataset import Dataset
+from cosmotech_api.api.runner_api import RunnerApi
 from cosmotech_api.api.workspace_api import WorkspaceApi
 from rich.logging import RichHandler
 
@@ -36,17 +39,16 @@ def main():
     )
     parameters = dict()
     with cosmotech_api.ApiClient(configuration) as api_client:
-        scenario_api_instance = ScenarioApi(api_client)
+        runner_api_instance = RunnerApi(api_client)
         dataset_api_instance = DatasetApi(api_client)
         workspace_api_instance = WorkspaceApi(api_client)
-        # TODO : need to replace use of scenario_api to runner api when available
-        scenario_data = scenario_api_instance.find_scenario_by_id(organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
-                                                                  workspace_id=os.environ.get("CSM_WORKSPACE_ID"),
-                                                                  scenario_id=os.environ.get("CSM_SCENARIO_ID"))
+        runner_data = runner_api_instance.get_runner(organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
+                                                     workspace_id=os.environ.get("CSM_WORKSPACE_ID"),
+                                                     runner_id=os.environ.get("CSM_RUNNER_ID"))
         LOGGER.info("Loaded run data")
         target_dataset = dataset_api_instance.find_dataset_by_id(
             organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
-            dataset_id=scenario_data['dataset_list'][0])
+            dataset_id=runner_data['dataset_list'][0])
         LOGGER.info("Loaded target dataset info")
         # Pre-read of all workspace files to ensure ready to download AZ storage files
         all_api_files = workspace_api_instance.find_all_workspace_files(
@@ -54,7 +56,7 @@ def main():
             workspace_id=os.environ.get("CSM_WORKSPACE_ID"))
 
         # Loop over all parameters
-        for parameter in scenario_data['parameters_values']:
+        for parameter in runner_data['parameters_values']:
             value = parameter['value']
             var_type = parameter['var_type']
             param_id = parameter['parameter_id']
@@ -100,78 +102,93 @@ def main():
 
     LOGGER.info("All parameters are loaded")
 
-    customers = list()
     bars = list()
-    links = list()
 
     bar = {
         "type": "Bar",
         "name": "MyBar",
-        "params": f"""NbWaiters: {int(parameters["nb_waiters"][0])},""" +
-                  f"""RestockQty: {int(parameters["restock_qty"][0])},""" +
+        "params": f"""NbWaiters: {int(parameters["num_waiters"][0])},""" +
+                  f"""RestockQty: {int(parameters["restock_quantity"][0])},""" +
                   f"""Stock: {int(parameters["stock"][0])}""",
     }
-    LOGGER.info("Created 'MyBar' entity")
-
     bars.append(bar)
-    # TODO : replace "initial_stock_dataset" by real parameter name "customer_list"
-    with open(parameters["initial_stock_dataset"][0] + "/initial_stock_dataset.csv") as _f:
+
+    base_path = parameters["bar_instance"][0]
+    with ZipFile(base_path + "/brewery_instance.zip") as zip:
+        zip.extractall(base_path)
+
+    base_path = base_path + "/reference"
+    customers = list()
+    with open(base_path + "/Nodes/Customer.csv") as _f:
         LOGGER.info("Found 'Customer' list")
-        current_id = -1
-        for r in _f:
-            name = r.strip().replace('"', '')
-            current_id += 1
-            if not current_id:
-                continue
+        csv_r = csv.DictReader(_f)
+        for row in csv_r:
             customer = {
                 "type": "Customer",
-                "name": name,
-                "params": f"Name: '{name}',"
-                          f"Satisfaction: 0,"
-                          f"SurroundingSatisfaction: 0,"
-                          f"Thirsty: false",
+                "name": row['id'],
+                "params": f"Name: '{row['id']}',"
+                          f"Satisfaction: {row['Satisfaction']},"
+                          f"SurroundingSatisfaction: {row['SurroundingSatisfaction']},"
+                          f"Thirsty: {row['Thirsty']}",
             }
             customers.append(customer)
+
+    satisfactions = list()
+    with open(base_path + "/Edges/arc_Satisfaction.csv") as _f:
+        LOGGER.info("Found 'Customer satisfaction' relation")
+        csv_r = csv.DictReader(_f)
+        for row in csv_r:
+            satisfaction = {
+                "type": "satisfaction",
+                "source": row['source'],
+                "target": row['target'],
+                "name": row['name'],
+                "params": f"a: 'a'"
+            }
+            satisfactions.append(satisfaction)
+
+    links = list()
+    with open(base_path + "/Edges/Bar_vertex.csv") as _f:
+        LOGGER.info("Found 'Bar vertex' relation")
+        csv_r = csv.DictReader(_f)
+        for row in csv_r:
             link = {
-                "type": "arc_to_Customer",
-                "source": bar["name"],
-                "target": name,
-                "name": f'{bar["name"]}-To-{name}',
-                "params": f"Name: '{bar['name']}-To-{name}'",
+                "type": "bar_vertex",
+                "source": row['source'],
+                "target": row['target'],
+                "name": row['name'],
+                "params": f"a: 'a'"
             }
             links.append(link)
-        LOGGER.info(f"Created {len(customers)} 'Customer' entities")
 
-    LOGGER.info("Writing data into target Dataset")
+    dataset = Dataset(ingestion_status="SUCCESS")
+    dataset_api_instance.update_dataset(os.environ.get("CSM_ORGANIZATION_ID"), runner_data['dataset_list'][0], dataset)
 
-    dataset_api_instance.twingraph_query(
-        organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
-        dataset_id=scenario_data['dataset_list'][0],
-        dataset_twin_graph_query={"query": "MATCH (n) DETACH DELETE n"})
+    try:
+        LOGGER.info("Erasing data from target Dataset")
+        dataset_api_instance.twingraph_query(
+            organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
+            dataset_id=runner_data['dataset_list'][0],
+            dataset_twin_graph_query={"query": "MATCH (n) DETACH DELETE n"})
+    except e:
+        pass
 
-    create = dataset_api_instance.create_twingraph_entities(
-        organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
-        dataset_id=scenario_data['dataset_list'][0],
-        type="node",
-        graph_properties=bars + customers)
-    create = json.loads(create.replace("][", ","))
+    not_pending_dataset = Dataset(ingestion_status="PENDING")
+    dataset_api_instance.update_dataset(os.environ.get("CSM_ORGANIZATION_ID"), runner_data['dataset_list'][0], not_pending_dataset)
 
-    ids = dict()
-
-    for item in create:
-        twin_id = item["a"]["id"]
-        entity_id = item["a"]["properties"]["id"]
-        ids[entity_id] = twin_id
-
-    for link in links:
-        link["source"] = ids[link["source"]]
-        link["target"] = ids[link["target"]]
-
+    LOGGER.info("Writing entities into target Dataset")
     dataset_api_instance.create_twingraph_entities(
         organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
-        dataset_id=scenario_data['dataset_list'][0],
+        dataset_id=runner_data['dataset_list'][0],
+        type="node",
+        graph_properties=bars + customers)
+
+    LOGGER.info("Writing relationshipss into target Dataset")
+    dataset_api_instance.create_twingraph_entities(
+        organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
+        dataset_id=runner_data['dataset_list'][0],
         type="relationship",
-        graph_properties=links)
+        graph_properties=satisfactions + links)
 
     LOGGER.info("ETL Run finished")
 
