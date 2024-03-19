@@ -122,7 +122,6 @@ def main():
         blob_data = blob.download_blob()
         blob_data.readinto(my_blob)
 
-    print(os.getcwd())
     with ZipFile(base_path + "/brewery_instance.zip") as zip:
         zip.extractall(base_path)
 
