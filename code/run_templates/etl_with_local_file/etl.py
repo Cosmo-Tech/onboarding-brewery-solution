@@ -4,6 +4,7 @@ import os
 
 from zipfile import ZipFile
 import csv
+import glob
 
 import cosmotech_api
 from azure.identity import DefaultAzureCredential
@@ -114,7 +115,8 @@ def main():
     bars.append(bar)
 
     base_path = parameters["bar_instance"][0]
-    with ZipFile(base_path + "/brewery_instance.zip") as zip:
+    file_name = glob.glob('*.zip', root_dir=base_path)[0]
+    with ZipFile(base_path + "/" + file_name) as zip:
         zip.extractall(base_path)
 
     base_path = base_path + "/reference"
