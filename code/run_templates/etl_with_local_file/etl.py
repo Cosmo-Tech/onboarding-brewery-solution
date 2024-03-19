@@ -38,68 +38,16 @@ def main():
         discard_unknown_keys=True,
         access_token=access_token
     )
-    parameters = dict()
+
     with cosmotech_api.ApiClient(configuration) as api_client:
         runner_api_instance = RunnerApi(api_client)
         dataset_api_instance = DatasetApi(api_client)
-        workspace_api_instance = WorkspaceApi(api_client)
         runner_data = runner_api_instance.get_runner(organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
                                                      workspace_id=os.environ.get("CSM_WORKSPACE_ID"),
                                                      runner_id=os.environ.get("CSM_RUNNER_ID"))
-        LOGGER.info("Loaded run data")
-        target_dataset = dataset_api_instance.find_dataset_by_id(
-            organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
-            dataset_id=runner_data['dataset_list'][0])
-        LOGGER.info("Loaded target dataset info")
-        # Pre-read of all workspace files to ensure ready to download AZ storage files
-        all_api_files = workspace_api_instance.find_all_workspace_files(
-            organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
-            workspace_id=os.environ.get("CSM_WORKSPACE_ID"))
 
-        # Loop over all parameters
-        for parameter in runner_data['parameters_values']:
-            value = parameter['value']
-            var_type = parameter['var_type']
-            param_id = parameter['parameter_id']
-
-            LOGGER.info(f"Found parameter '{param_id}' with value '{value}'")
-
-            # Download "%DATASETID%" files if AZ storage + workspace file based
-            if var_type == "%DATASETID%":
-                dataset = dataset_api_instance.find_dataset_by_id(
-                    organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
-                    dataset_id=value)
-                param_values = dataset['connector']['parameters_values']
-
-                # Check if file is AZ storage based and is a workspace file
-                _base_file_name = param_values.get('AZURE_STORAGE_CONTAINER_BLOB_PREFIX', False)
-                if not _base_file_name or "%WORKSPACE_FILE%" not in _base_file_name:
-                    LOGGER.warning(f"Parameter '{param_id}' is not a downloadable dataset - Skipping it")
-                    continue
-                LOGGER.info(f"Parameter '{param_id}' is a downloadable dataset")
-                _file_name = _base_file_name.replace('%WORKSPACE_FILE%/', '')
-                tmp_dataset_dir = os.environ.get("CSM_PARAMETERS_ABSOLUTE_PATH") + "/" + param_id
-                os.makedirs(tmp_dataset_dir, exist_ok=True)
-                # Lookup in previously loaded list of files to find all files corresponding to the dataset
-                existing_files = list(_f.to_dict().get('file_name')
-                                      for _f in all_api_files
-                                      if _f.to_dict().get('file_name', '').startswith(_file_name))
-                files_len = len(existing_files)
-                files_txt, those_txt = ["file", "files"][files_len > 1], ["it", "those"][files_len > 1]
-                LOGGER.info(f"  - {len(existing_files)} {files_txt} found in the dataset, downloading {those_txt}")
-                # Download and write locally all files corresponding
-                for _existing_file_name in existing_files:
-                    dl_file = workspace_api_instance.download_workspace_file(
-                        file_name=_existing_file_name,
-                        organization_id=os.environ.get("CSM_ORGANIZATION_ID"),
-                        workspace_id=os.environ.get("CSM_WORKSPACE_ID"))
-                    target_file = os.path.join(tmp_dataset_dir, _existing_file_name.split('/')[-1])
-                    with open(target_file, "wb") as tmp_file:
-                        tmp_file.write(dl_file.read())
-                value = tmp_dataset_dir
-            parameters[param_id] = (value, var_type)
-    # Now all parameters and Datasets are available locally
-    # %DATASETID% type files have value replaced with folder containing them
+    with open(os.path.join(os.environ.get("CSM_PARAMETERS_ABSOLUTE_PATH"), "parameters.json")) as f:
+        parameters = {d["parameterId"]: d["value"] for d in json.loads(f.read())}
 
     LOGGER.info("All parameters are loaded")
 
@@ -108,13 +56,13 @@ def main():
     bar = {
         "type": "Bar",
         "name": "MyBar",
-        "params": f"""NbWaiters: {int(parameters["num_waiters"][0])},""" +
-                  f"""RestockQty: {int(parameters["restock_quantity"][0])},""" +
-                  f"""Stock: {int(parameters["stock"][0])}""",
+        "params": f"""NbWaiters: {int(parameters["num_waiters"])},""" +
+                  f"""RestockQty: {int(parameters["restock_quantity"])},""" +
+                  f"""Stock: {int(parameters["stock"])}""",
     }
     bars.append(bar)
 
-    base_path = parameters["bar_instance"][0]
+    base_path = parameters["bar_instance"]
     file_name = glob.glob('*.zip', root_dir=base_path)[0]
     with ZipFile(base_path + "/" + file_name) as zip:
         zip.extractall(base_path)
