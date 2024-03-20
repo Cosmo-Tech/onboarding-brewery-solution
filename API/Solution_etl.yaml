@@ -1,0 +1,105 @@
+
+key: brewery
+name: 'Demo Brewery Solution, walkthrough version'
+description: A simple example of a Cosmo Tech solution built using the Brewery model
+tags:
+  - walkthrough
+  - Brewery
+  - CoMETS
+repository: demo_etl_brewery
+version: latest
+parameters:
+  - id: stock
+    labels:
+      fr: Stock
+      en: Stock
+    varType: string
+    defaultValue: 100
+  - id: restock_quantity
+    labels:
+      fr: Réapprovisionnement
+      en: Restock
+    varType: string
+    defaultValue: 25
+  - id: num_waiters
+    labels:
+      fr: Serveurs
+      en: Waiters
+    varType: string
+    defaultValue: 5
+  - id: bar_instance
+    labels:
+      fr: fichier d'instance
+      en: instance file
+    varType: '%DATASETID%'
+  - id: azure_storage_co_string
+    labels:
+      fr: azure storage connection string
+      en: azure storage connection string
+    varType: string
+  - id: az_storage_account
+    labels:
+      fr: azure storage account name
+      en: azure storage account name
+    varType: string
+  - id: az_storage_container
+    labels:
+      fr: azure storage container name
+      en: azure storage container name
+    varType: string
+  - id: az_storage_path
+    labels:
+      fr: azure storage path
+      en: azure storage path
+    varType: string
+parameterGroups:
+  - id: bar_parameters
+    labels:
+      fr: Bar
+      en: Bar
+    parameters:
+      - stock
+      - restock_quantity
+      - num_waiters
+  - id: local_file
+    labels:
+      fr: local_file
+      en: local_file
+    parameters:
+      - bar_instance
+  - id: azure_storage
+    labels:
+      fr: azure_storage_connection
+      en: azure_storage connexion
+    parameters:
+      - azure_storage_co_string
+      - az_storage_account
+      - az_storage_container
+      - az_storage_path
+runTemplates:
+  - id: what_if
+    name: Basic what-if run type
+    description: Basic what-if run type with a default Run step.
+    tags:
+      - basic_simulation
+      - CoMETS
+    parameterGroups:
+      - bar_parameters
+    fetchDatasets: true
+    fetchScenarioParameters: true
+    applyParameters: true
+    parametersJson: true
+    parametersHandlerSource: local
+    csmSimulation: BusinessApp_Simulation
+  - id: etl_with_local_file
+    tags:
+      - ETL
+    parameterGroups:
+      - bar_parameters
+      - local_file
+  - id: etl_with_azure_storage
+    tags:
+      - ETL
+    parameterGroups:
+      - bar_parameters
+      - azure_storage
