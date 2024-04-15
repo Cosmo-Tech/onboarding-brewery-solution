@@ -63,8 +63,8 @@ if not self.GetThirsty().Get() & test>5:
       </csm:Container>
     </csm:State>
     <csm:Communicator name="CustomerToCustomer">
-      <csm:Implementation language="cpp">
-        <csm:Code><![CDATA[return GetSatisfaction();]]></csm:Code>
+      <csm:Implementation language="python">
+        <csm:Code><![CDATA[return self.GetSatisfaction()]]></csm:Code>
       </csm:Implementation>
       <csm:CommunicatedReference>Integer</csm:CommunicatedReference>
       <csm:Destination>Customer</csm:Destination>
