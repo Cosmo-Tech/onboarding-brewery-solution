@@ -57,3 +57,8 @@ runTemplates:
     parametersJson: true
     parametersHandlerSource: local
     csmSimulation: BusinessApp_Simulation
+  - id: "sample"
+    name: "Basic sample run type"
+    description: "Sample what-if run type with a default Run step."
+    tags:
+      - "basic_simulation"

@@ -1,0 +1,12 @@
+{
+  "steps": [
+    {
+      "id": "hello",
+      "command": "bash",
+      "arguments": [
+        "code/run_templates/csmhello/hello.sh"
+      ],
+      "description": "hello sh"
+    }
+  ]
+}

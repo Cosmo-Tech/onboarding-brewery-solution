@@ -1,0 +1,32 @@
+{
+  "steps": [
+    {
+      "id": "CopyLocalData",
+      "command": "python",
+      "arguments": [
+        "code/run_templates/sample/copy_local_data.py"
+      ],
+      "description": "Copy local data packaged with simulator to simulation data folder"
+    },
+    {
+      "id": "SimulationRun",
+      "command": "csm-orc",
+      "arguments": [
+        "run-step",
+        "--template", "sample",
+        "--steps", "engine"
+      ],
+      "description": "Runs the sample simulation",
+      "useSystemEnvironment": true,
+      "environment": {
+        "CSM_SIMULATION": {
+          "description": "The simulation file to run",
+          "defaultValue": "BusinessApp_Simulation"
+        }
+      },
+      "precedents": [
+        "CopyLocalData"
+      ]
+    }
+  ]
+}

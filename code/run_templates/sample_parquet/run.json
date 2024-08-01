@@ -1,0 +1,25 @@
+{
+  "steps": [
+    {
+      "id": "CopyLocalData",
+      "command": "python",
+      "arguments": [
+        "code/run_templates/sample/copy_local_data.py"
+      ],
+      "description": "Copy local data packaged with simulator to simulation data folder"
+    },
+    {
+      "id": "SimulationRun",
+      "command": "main",
+      "arguments": [
+        "-i", "BusinessApp_Simulation",
+        "--parquet-consumer"
+      ],
+      "description": "Runs the sample simulation with parquet consumer",
+      "useSystemEnvironment": true,
+      "precedents": [
+        "CopyLocalData"
+      ]
+    }
+  ]
+}
