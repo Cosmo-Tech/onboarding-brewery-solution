@@ -1,0 +1,23 @@
+# Basic info about the solution
+key: "brewery"
+name: "Sample Brewery Solution"
+description: "A simple sample of a Cosmo Tech solution built using the Brewery model without input parameters"
+tags:
+  - "Sample"
+  - "Brewery"
+  - "No parameters"
+# Where the simulator is found
+repository: "brewery_simulator"
+version: "0.0.10"
+# Run templates
+runTemplates:
+  - id: "sample"
+    name: "Basic sample run type"
+    description: "Sample what-if run type with a default Run step."
+    tags:
+      - "basic_simulation"
+security:
+  default: none
+  accessControlList:
+  - id: $USER_EMAIL
+    role: admin
