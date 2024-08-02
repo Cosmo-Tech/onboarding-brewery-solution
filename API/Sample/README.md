@@ -3,7 +3,7 @@ This is the documentation to make the sample run template of the brewery solutio
 
 You need at least version 4.0.4-onprem to run this sample.
 
-This tutorial is based on the usage of an API KEY, please refer to the Cosmo Tech Platform installation guide to configure it.
+This tutorial is based on the usage of an API KEY, please refer to the Cosmo Tech [Platform installation helm help](https://artifacthub.io/packages/helm/cosmotech-api/cosmotech-api#optional-configure-an-api-key) to configure it.
 
 The Cosmo Tech brewery simulator used in this tutorial is publicly available here: https://github.com/Cosmo-Tech/onboarding-brewery-solution/pkgs/container/brewery_simulator
 
@@ -51,6 +51,20 @@ Query the bar probe with stock level:
 ``` bash
 ./query_results_data.sh
 ```
+![json results image](media/results_json.png)
+
+### Result direct access
+#### RabbitMQ
+If you have setup an external rabbitmq server, you can add a consumer to get the results message directly from the workspace queue.
+![workspace queue in rabbitmq image](media/results_rabbitmq.png)
+``` bash
+#### Postgres
+If you have setup an external postgres database, you can query the results directly from it with the reader user defined in the Platform configuration.
+Tables are prefixed with the 'p_' string before the name of the probe in lowercase, here p_barprobe.
+``` sql
+SELECT * FROM public.p_barprobe;
+```
+![result with pgadmin image](media/results_pgadmin.png)
 
 ## Optional: Build the image yourself
 In order to build you own brewery image you need to install the Cosmo Tech SDK and run the following command:
