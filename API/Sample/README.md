@@ -3,6 +3,8 @@ This is the documentation to make the sample run template of the brewery solutio
 
 You need at least version 4.0.4-onprem to run this sample.
 
+This tutorial is based on the usage of an API KEY, please refer to the Cosmo Tech Platform installation guide to configure it.
+
 The Cosmo Tech brewery simulator used in this tutorial is publicly available here: https://github.com/Cosmo-Tech/onboarding-brewery-solution/pkgs/container/brewery_simulator
 
 You need at least tag 0.0.10 of the brewery image simulator to run this sample.
@@ -67,3 +69,4 @@ or direct docker push command:
 docker tag...
 docker push...
 ```
+You need to change the repository and version defined in the create_solution.yaml file.
