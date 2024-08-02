@@ -1,0 +1,14 @@
+organisationId: $ORGANIZATION
+name: Brewery Analysis
+key: brewery
+description: Brewery analysis for stock, production, transport and customer satisfaction
+version: 1.0.0
+tags:
+  - Brewery
+solution:
+  solutionId: $SOLUTION
+security:
+  default: viewer
+  accessControlList:
+  - id: $USER_EMAIL
+    role: admin

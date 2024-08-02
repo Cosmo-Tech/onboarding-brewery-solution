@@ -1,0 +1,12 @@
+name: Brewery Sample Analysis
+description: Brewery sample reference analysis
+tags:
+  - Brewery
+  - reference
+  - sample
+runTemplateId: sample
+security:
+  default: viewer
+  accessControlList:
+  - id: $USER_EMAIL
+    role: admin
