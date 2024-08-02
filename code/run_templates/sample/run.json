@@ -2,9 +2,9 @@
   "steps": [
     {
       "id": "CopyLocalData",
-      "command": "python",
+      "command": "bash",
       "arguments": [
-        "code/run_templates/sample/copy_local_data.py"
+        "code/run_templates/sample/copy_local_data.sh"
       ],
       "description": "Copy local data packaged with simulator to simulation data folder"
     },

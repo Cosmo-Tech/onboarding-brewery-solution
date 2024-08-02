@@ -1,0 +1,6 @@
+name: Sample Organization
+security:
+  default: none
+  accessControlList:
+  - id: $USER_EMAIL
+    role: admin
