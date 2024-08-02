@@ -57,7 +57,6 @@ Query the bar probe with stock level:
 #### RabbitMQ
 If you have setup an external rabbitmq server, you can add a consumer to get the results message directly from the workspace queue.
 ![workspace queue in rabbitmq image](media/results_rabbitmq.png)
-``` bash
 #### Postgres
 If you have setup an external postgres database, you can query the results directly from it with the reader user defined in the Platform configuration.
 Tables are prefixed with the 'p_' string before the name of the probe in lowercase, here p_barprobe.
