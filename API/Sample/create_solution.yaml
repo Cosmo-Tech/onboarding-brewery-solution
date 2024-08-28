@@ -16,6 +16,11 @@ runTemplates:
     description: "Sample what-if run type with a default Run step."
     tags:
       - "basic_simulation"
+  - id: "sample_rds_direct"
+    name: "Basic sample run type with RDS direct"
+    description: "Sample what-if run type with a default Run step with RDS direct."
+    tags:
+      - "basic_simulation"
 security:
   default: none
   accessControlList:
