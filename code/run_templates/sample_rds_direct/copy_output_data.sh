@@ -1,4 +1,4 @@
-export RESULT_DATASET_PATH="${CSM_DATASET_ABSOLUTE_PATH}results"
+export RESULT_DATASET_PATH="${CSM_DATASET_ABSOLUTE_PATH}/results"
 if [ ! -d "${RESULT_DATASET_PATH}" ]; then
 echo creating folder "${RESULT_DATASET_PATH}"
 mkdir -p "${RESULT_DATASET_PATH}"

@@ -7,7 +7,7 @@
       "arguments":[
         "code/run_templates/sample/copy_local_data.sh"
       ],
-      "description":"Copylocaldatapackagedwithsimulatortosimulationdatafolder"
+      "description":"Copy local data packaged with simulator to simulation data folder"
     },
     {
       "id":"SimulationRun",
@@ -27,7 +27,7 @@
       "command":"bash",
       "useSystemEnvironment":true,
       "arguments":[
-        "-c","code/run_templates/sample_rds_direct/copy_output_data.sh"
+        "code/run_templates/sample_rds_direct/copy_output_data.sh"
       ],
       "precedents":[
         "SimulationRun"
@@ -39,7 +39,7 @@
       "command":"bash",
       "useSystemEnvironment":true,
       "arguments":[
-        "-c","code/run_templates/sample_rds_direct/rename_headers.sh"
+        "code/run_templates/sample_rds_direct/rename_headers.sh"
       ],
       "precedents":[
         "CopyResults"
@@ -52,7 +52,7 @@
         "api",
         "rds-send-csv",
         "--source-folder",
-        "${CSM_DATASET_ABSOLUTE_PATH}results"
+        "${CSM_DATASET_ABSOLUTE_PATH}/results"
       ],
       "useSystemEnvironment":true,
       "precedents":[

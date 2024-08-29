@@ -1,4 +1,4 @@
-export RESULT_DATASET_PATH="${CSM_DATASET_ABSOLUTE_PATH}results"
+export RESULT_DATASET_PATH="${CSM_DATASET_ABSOLUTE_PATH}/results"
 if [ -z $RESULT_DATASET_PATH ]; then
     echo "RESULT_DATASET_PATH is not set"
     exit 1
