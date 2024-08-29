@@ -38,6 +38,15 @@ This sample does not need any input dataset.
 ``` bash
 ./create_workspace.sh
 ```
+### For _sample_rds_direct_ run_template
+sample_rds_direct run template use connection to the Cosmo Tech Platform RDS server.
+
+In order to authentify to the API it must use the API Key defined in this example.
+
+Create a CSM_API_KEY secret at the workspace level:
+``` bash
+./create_workspace_api_key.sh
+```
 ### Scenario
 ``` bash
 ./create_scenario.sh
@@ -47,9 +56,15 @@ Run the scenario
 ``` bash
 ./run.sh
 ```
+### For _sample_ run_template
 Query the bar probe with stock level:
 ``` bash
 ./query_results_data.sh
+```
+### For _sample_rds_direct_ run_template
+Query the bar probe with stock level with custom data (sample_rds_direct run template):
+``` bash
+./query_custom_data.sh
 ```
 ![json results image](media/results_json.png)
 
