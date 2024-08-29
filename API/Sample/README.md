@@ -67,18 +67,27 @@ Query the bar probe with stock level with custom data (sample_rds_direct run tem
 ./query_custom_data.sh
 ```
 ![json results image](media/results_json.png)
+### For _sample_postgres_direct_ run_template
+Query directly the external Postgres Database
 
 ### Result direct access
 #### RabbitMQ
 If you have setup an external rabbitmq server, you can add a consumer to get the results message directly from the workspace queue.
 ![workspace queue in rabbitmq image](media/results_rabbitmq.png)
-#### Postgres
-If you have setup an external postgres database, you can query the results directly from it with the reader user defined in the Platform configuration.
+#### Result Data Service + external Postgres
+If you have setup an external postgres database in result data service, you can query the results directly from it with the reader user defined in the Platform configuration.
 Tables are prefixed with the 'p_' string before the name of the probe in lowercase, here p_barprobe.
 ``` sql
 SELECT * FROM public.p_barprobe;
 ```
 ![result with pgadmin image](media/results_pgadmin.png)
+#### External Postgres
+If you have setup an external postgres database in result data service, you can query the results directly with postgres client.
+Tables are prefixed with organization id, workspace id and run id.
+``` sql
+SELECT id, run_id, simulationrun, probeinstance, proberun, customername, customersatisfaction
+	FROM csm.o_d101zx7rp18r_w_1ow0o4jr709x_r_304vrk0e2y4l_customerprobe;
+```
 
 ## Optional: Build the image yourself
 In order to build you own brewery image you need to install the Cosmo Tech SDK and run the following command:
