@@ -15,22 +15,34 @@
       "arguments":[
         "-i","BusinessApp_Simulation"
       ],
-      "description":"Runsthesamplesimulation",
+      "description":"Runs the sample simulation",
       "useSystemEnvironment":false,
       "precedents":[
         "CopyLocalData"
       ]
     },
     {
+      "id":"CopyResults",
+      "description":"Copy results",
+      "command":"bash",
+      "useSystemEnvironment":true,
+      "arguments":[
+        "-c","code/run_templates/sample_rds_direct/copy_output_data.sh"
+      ],
+      "precedents":[
+        "SimulationRun"
+      ]
+    },
+    {
       "id":"RenameHeaders",
-      "description":"RenameheadersintheoutputCSVfilestoavoidspaceincolumnname",
+      "description":"Rename headers in the output CSV files to avoid space in column name",
       "command":"bash",
       "useSystemEnvironment":true,
       "arguments":[
         "-c","code/run_templates/sample_rds_direct/rename_headers.sh"
       ],
       "precedents":[
-        "SimulationRun"
+        "CopyResults"
       ]
     },
     {
@@ -40,8 +52,9 @@
         "api",
         "rds-send-csv",
         "--source-folder",
-        "$CSM_OUTPUT_ABSOLUTE_PATH"
+        "${CSM_DATASET_ABSOLUTE_PATH}results"
       ],
+      "useSystemEnvironment":true,
       "precedents":[
         "RenameHeaders"
       ]

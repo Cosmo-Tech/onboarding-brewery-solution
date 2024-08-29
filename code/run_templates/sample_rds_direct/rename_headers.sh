@@ -1,7 +1,8 @@
-if [ -z $CSM_OUTPUT_ABSOLUTE_PATH ]; then
-    echo "CSM_OUTPUT_ABSOLUTE_PATH is not set"
+export RESULT_DATASET_PATH="${CSM_DATASET_ABSOLUTE_PATH}results"
+if [ -z $RESULT_DATASET_PATH ]; then
+    echo "RESULT_DATASET_PATH is not set"
     exit 1
 else
-    echo "CSM_OUTPUT_ABSOLUTE_PATH is set to $CSM_OUTPUT_ABSOLUTE_PATH"
-    find $CSM_OUTPUT_ABSOLUTE_PATH -type f -exec sed -i -e 's/ //g' {} \;
+    echo "RESULT_DATASET_PATH is set to $RESULT_DATASET_PATH"
+    find $RESULT_DATASET_PATH -type f -exec sed -i -e 's/ //g' {} \;
 fi
