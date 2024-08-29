@@ -21,6 +21,11 @@ runTemplates:
     description: "Sample what-if run type with a default Run step with RDS direct."
     tags:
       - "basic_simulation"
+  - id: "sample_postgres_direct"
+    name: "Basic sample run type with Postgres direct"
+    description: "Sample what-if run type with a default Run step with Postgres direct."
+    tags:
+      - "basic_simulation"
 security:
   default: none
   accessControlList:

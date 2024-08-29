@@ -1,0 +1,10 @@
+[
+  {
+    "id": "sample_postgres_direct",
+    "name": "Basic sample run type with postgres direct",
+    "description": "Sample what-if run type with a default Run step with postgres direct.",
+    "tags": [
+      "basic_simulation"
+    ]
+  }
+]
