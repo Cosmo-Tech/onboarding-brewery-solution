@@ -22,35 +22,11 @@
       ]
     },
     {
-      "id":"CopyResults",
-      "description":"Copy results",
-      "command":"bash",
-      "useSystemEnvironment":true,
-      "arguments":[
-        "code/run_templates/sample_postgres_direct/copy_output_data.sh"
-      ],
-      "precedents":[
-        "SimulationRun"
-      ]
-    },
-    {
-      "id":"RenameHeaders",
-      "description":"Rename headers in the output CSV files to avoid space in column name",
-      "command":"bash",
-      "useSystemEnvironment":true,
-      "arguments":[
-        "code/run_templates/sample_postgres_direct/rename_headers.sh"
-      ],
-      "precedents":[
-        "CopyResults"
-      ]
-    },
-    {
       "id":"SendResults",
       "command":"python",
       "arguments":[
         "code/run_templates/sample_postgres_direct/send_postgres_data.py",
-        "--source-folder", "${CSM_DATASET_ABSOLUTE_PATH}/results",
+        "--source-folder", "${CSM_OUTPUT_ABSOLUTE_PATH}",
         "--postgres-host", "${CSM_POSTGRES_HOST}",
         "--postgres-db", "${CSM_POSTGRES_DB}",
         "--postgres-schema", "${CSM_POSTGRES_SCHEMA}",
@@ -63,7 +39,7 @@
       ],
       "useSystemEnvironment":true,
       "precedents":[
-        "RenameHeaders"
+        "SimulationRun"
       ]
     }
   ]
