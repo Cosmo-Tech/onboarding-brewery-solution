@@ -12,7 +12,8 @@ else
   --from-literal CSM_POSTGRES_DB=${CSM_POSTGRES_DB} \
   --from-literal CSM_POSTGRES_SCHEMA=${CSM_POSTGRES_SCHEMA} \
   --from-literal CSM_POSTGRES_USER=${CSM_POSTGRES_USER} \
-  --from-literal CSM_POSTGRES_PASSWORD=${CSM_POSTGRES_PASSWORD}
+  --from-literal CSM_POSTGRES_PASSWORD=${CSM_POSTGRES_PASSWORD} \
+  --from-literal CSM_POSTGRES_PORT=${CSM_POSTGRES_PORT}
   echo
   echo Secret created with postgresql information
 fi

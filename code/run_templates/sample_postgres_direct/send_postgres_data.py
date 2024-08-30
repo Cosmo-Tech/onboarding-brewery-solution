@@ -11,6 +11,7 @@ import pathlib
 parser = argparse.ArgumentParser(description='Send csv data to postgres')
 parser.add_argument('--source-folder', help='result file source folder', required=True)
 parser.add_argument('--postgres-host', help='Postgresql host name', required=True)
+parser.add_argument('--postgres-port', help='Postgresql port', required=False, default=5432)
 parser.add_argument('--postgres-db', help='Postgresql database name', required=True)
 parser.add_argument('--postgres-schema', help='Postgresql database name', required=True)
 parser.add_argument('--postgres-user', help='Postgresql connection user name', required=True)
@@ -32,7 +33,8 @@ with psycopg2.connect(
     host=args.postgres_host,
     database=args.postgres_db,
     user=args.postgres_user,
-    password=args.postgres_password
+    password=args.postgres_password,
+    port=args.postgres_port
 ) as conn:
     with conn.cursor() as cur:
         source_dir = pathlib.Path(args.source_folder)
