@@ -1,0 +1,45 @@
+{
+  "steps": [
+    {
+      "id":"CopyLocalData",
+      "command":"bash",
+      "arguments":[
+        "code/run_templates/sample_postgres_direct/copy_local_data.sh"
+      ],
+      "description":"Copy local data packaged with simulator to simulation data folder"
+    },
+    {
+      "id": "SimulationRun",
+      "command": "main",
+      "arguments": [
+        "-i", "BusinessApp_Simulation",
+        "--parquet-consumer"
+      ],
+      "description": "Runs the sample simulation with parquet consumer",
+      "useSystemEnvironment": true,
+      "precedents": [
+        "CopyLocalData"
+      ]
+    },
+    {
+      "id":"SendResults",
+      "command":"python",
+      "arguments": [
+        "code/run_templates/sample_parquet_s3/send_parquet_s3.py",
+        "--source-folder", "${CSM_OUTPUT_ABSOLUTE_PATH}",
+        "--s3-url", "${AWS_ENDPOINT_URL}",
+        "--s3-access-key-id", "${AWS_ACCESS_KEY_ID}",
+        "--s3-secret-access-key", "${AWS_SECRET_ACCESS_KEY}",
+        "--s3-bucket-name", "${S3_BUCKET_NAME}",
+        "--csm-organization-id", "${CSM_ORGANIZATION_ID}",
+        "--csm-workspace-id", "${CSM_WORKSPACE_ID}",
+        "--csm-runner-id", "${CSM_RUNNER_ID}",
+        "--csm-run-id", "${CSM_RUN_ID}"
+      ],
+      "useSystemEnvironment":true,
+      "precedents":[
+        "SimulationRun"
+      ]
+    }
+  ]
+}
