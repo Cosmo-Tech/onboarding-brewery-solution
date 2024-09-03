@@ -8,7 +8,7 @@ else
   kubectl -n bahamut delete secret ${ORGANIZATION}-${WORKSPACE}
   kubectl -n bahamut create secret generic ${ORGANIZATION}-${WORKSPACE} \
   --from-literal CSM_API_KEY=${API_KEY} \
-  --from-literal CSM_POSTGRES_HOST=${CSM_POSTGRES_HOST_K8S} \
+  --from-literal CSM_POSTGRES_HOST=${CSM_POSTGRES_HOST} \
   --from-literal CSM_POSTGRES_DB=${CSM_POSTGRES_DB} \
   --from-literal CSM_POSTGRES_SCHEMA=${CSM_POSTGRES_SCHEMA} \
   --from-literal CSM_POSTGRES_USER=${CSM_POSTGRES_USER} \

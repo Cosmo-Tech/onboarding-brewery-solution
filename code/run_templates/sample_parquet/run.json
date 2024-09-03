@@ -1,12 +1,12 @@
 {
   "steps": [
     {
-      "id": "CopyLocalData",
-      "command": "python",
-      "arguments": [
-        "code/run_templates/sample/copy_local_data.py"
+      "id":"CopyLocalData",
+      "command":"bash",
+      "arguments":[
+        "code/run_templates/sample_postgres_direct/copy_local_data.sh"
       ],
-      "description": "Copy local data packaged with simulator to simulation data folder"
+      "description":"Copy local data packaged with simulator to simulation data folder"
     },
     {
       "id": "SimulationRun",
@@ -16,7 +16,13 @@
         "--parquet-consumer"
       ],
       "description": "Runs the sample simulation with parquet consumer",
-      "useSystemEnvironment": true,
+      "useSystemEnvironment": false,
+      "environment": {
+        "CSM_LOG_LEVEL": {
+          "value": "info",
+          "description": "log level for main simulation"
+        }
+      },
       "precedents": [
         "CopyLocalData"
       ]

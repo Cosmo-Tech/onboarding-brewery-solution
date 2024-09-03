@@ -16,7 +16,7 @@
         "--parquet-consumer"
       ],
       "description": "Runs the sample simulation with parquet consumer",
-      "useSystemEnvironment": true,
+      "useSystemEnvironment": false,
       "precedents": [
         "CopyLocalData"
       ]
