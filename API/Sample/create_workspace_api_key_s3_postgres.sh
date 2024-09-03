@@ -14,10 +14,10 @@ else
   --from-literal CSM_POSTGRES_USER=${CSM_POSTGRES_USER} \
   --from-literal CSM_POSTGRES_PASSWORD=${CSM_POSTGRES_PASSWORD} \
   --from-literal CSM_POSTGRES_PORT=${CSM_POSTGRES_PORT} \
-  --from-literal CSM_POSTGRES_HOST=${AWS_ENDPOINT_URL} \
-  --from-literal CSM_POSTGRES_HOST=${AWS_ACCESS_KEY_ID} \
-  --from-literal CSM_POSTGRES_HOST=${AWS_SECRET_ACCESS_KEY} \
-  --from-literal CSM_POSTGRES_HOST=${S3_BUCKET_NAME}
+  --from-literal AWS_ENDPOINT_URL=${AWS_ENDPOINT_URL} \
+  --from-literal AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+  --from-literal AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+  --from-literal S3_BUCKET_NAME=${S3_BUCKET_NAME}
   echo
   echo Secret created with postgresql information
 fi
