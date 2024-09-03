@@ -26,6 +26,11 @@ runTemplates:
     description: "Sample what-if run type with a default Run step with Postgres direct."
     tags:
       - "basic_simulation"
+  - id: "sample_parquet_s3"
+    name: "Basic sample run type with parquet to s3"
+    description: "Sample what-if run type with a default Run step with parquet to s3."
+    tags:
+      - "basic_simulation"
 security:
   default: none
   accessControlList:
