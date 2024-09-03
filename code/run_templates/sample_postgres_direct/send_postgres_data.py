@@ -26,7 +26,7 @@ LOGGER.info(f"Listing files in source directory: {args.source_folder}")
 LOGGER.info(glob.glob(f"{args.source_folder}/*"))
 
 def esc(key):
-    return key.replace(" ", "").replace("-", "_").lower()
+    return key.replace(" ", "_").replace("-", "_").lower()
 
 # https://www.postgresqltutorial.com/postgresql-python/
 with psycopg2.connect(
@@ -42,31 +42,38 @@ with psycopg2.connect(
             with open(csv_path) as _f:
                 dr = DictReader(_f)
                 probe_name = csv_path.name.replace(".csv", "")
-                probe_table_name=f"{esc(args.csm_organization_id)}_{esc(args.csm_workspace_id)}_{esc(args.csm_runner_id)}_{esc(probe_name)}"
+                probe_table_name=f"{esc(args.csm_run_id)}_{esc(probe_name)}"
                 schema_table=f"{args.postgres_schema}.{probe_table_name}"
                 probe_cols=", ".join([f"{esc(k)} TEXT" for k in dr.fieldnames])
                 sql_create_table=f"""
                     CREATE TABLE IF NOT EXISTS {schema_table}  (
                       id serial PRIMARY KEY,
+                      organization_id varchar(32),
+                      workspace_id varchar(32),
+                      runner_id varchar(32),
                       run_id varchar(32),
                       {probe_cols}
                     );
                 """
                 LOGGER.info(f"creating table [cyan bold]{schema_table}[/]")
-                cols=esc("run_id, " + ",".join(dr.fieldnames))
+                cols=esc("organization_id,workspace_id,runner_id,run_id," + ",".join(dr.fieldnames))
                 LOGGER.info(f"  - Column list: {cols}")
                 cur.execute(sql_create_table)
                 conn.commit()
-                cur.execute(f"""
-                    CREATE INDEX IF NOT EXISTS run_id_index ON {schema_table}(run_id)
-                """)
-                conn.commit()
+#                 cur.execute(f"""
+#                     CREATE INDEX IF NOT EXISTS run_id_index ON {schema_table}(run_id)
+#                 """)
+#                 conn.commit()
+#                 cur.execute(f"""
+#                     CREATE INDEX IF NOT EXISTS run_path_index ON {schema_table}(organization_id, workspace_id, runner_id, run_id)
+#                 """)
+#                 conn.commit()
 
                 LOGGER.info("  - preparing data")
                 data = []
 
                 for row in dr:
-                    n_row = [args.csm_run_id]
+                    n_row = [args.csm_organization_id, args.csm_workspace_id, args.csm_runner_id, args.csm_run_id]
                     for k, v in row.items():
                         n_row.append(v)
                     data.append(tuple(n_row))
