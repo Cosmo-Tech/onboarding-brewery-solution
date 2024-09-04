@@ -1,5 +1,6 @@
 import argparse
 import boto3
+from botocore.config import Config
 import os
 from cosmotech.coal.utils.logger import LOGGER
 
@@ -16,12 +17,15 @@ parser.add_argument('--csm-run-id', help='Cosmo Tech Runner run ID', required=Tr
 
 args = parser.parse_args()
 
-def get_connection(is_client=True):
-    connect_function = boto3.client if is_client else boto3.resource
-    return connect_function('s3')
+s3_client = boto3.client(
+    "s3",
+    aws_access_key_id=args.s3_access_key_id,
+    aws_secret_access_key=args.s3_secret_access_key,
+    endpoint_url=args.s3_url,
+    config=Config(signature_version='s3v4'),
+    #verify=False
+)
 
-s3_client = get_connection()
-s3 = boto3.resource('s3')
 s3_client.create_bucket(Bucket=args.s3_bucket_name)
 
 def uploadDirectory(path,bucketname):
