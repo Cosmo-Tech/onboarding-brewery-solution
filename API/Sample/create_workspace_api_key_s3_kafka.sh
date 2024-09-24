@@ -13,13 +13,13 @@ else
   --from-literal S3_BUCKET_NAME=${S3_BUCKET_NAME} \
   --from-literal S3_USE_SSL=${S3_USE_SSL} \
   --from-literal S3_CA_PEM=${S3_CA_PEM} \
-  --from-literal CSM_NOTIFY_KAFKA=${CSM_NOTIFY_KAFKA} \
-  --from-literal CSM_KAFKA_BROKER=${CSM_KAFKA_BROKER} \
-  --from-literal CSM_KAFKA_TOPIC=${CSM_KAFKA_TOPIC} \
-  --from-literal CSM_KAFKA_USERNAME=${CSM_KAFKA_USERNAME} \
-  --from-literal CSM_KAFKA_PASSWORD=${CSM_KAFKA_PASSWORD} \
-  --from-literal CSM_KAFKA_SSL=${CSM_KAFKA_SSL} \
-  --from-literal CSM_KAFKA_CA_PEM=${CSM_KAFKA_CA_PEM}
+  --from-literal NOTIFY_KAFKA=${CSM_NOTIFY_KAFKA} \
+  --from-literal KAFKA_BROKER=${CSM_KAFKA_BROKER} \
+  --from-literal KAFKA_TOPIC=${CSM_KAFKA_TOPIC} \
+  --from-literal KAFKA_USERNAME=${CSM_KAFKA_USERNAME} \
+  --from-literal KAFKA_PASSWORD=${CSM_KAFKA_PASSWORD} \
+  --from-literal KAFKA_SSL=${CSM_KAFKA_SSL} \
+  --from-literal KAFKA_CA_PEM=${CSM_KAFKA_CA_PEM}
   echo
   echo Secret created with postgresql information
 fi

@@ -13,7 +13,7 @@ else
   --from-literal S3_BUCKET_NAME=${S3_BUCKET_NAME} \
   --from-literal S3_USE_SSL=${S3_USE_SSL} \
   --from-literal S3_CA_PEM=${S3_CA_PEM} \
-  --from-literal CSM_NOTIFY_KAFKA="false"
+  --from-literal NOTIFY_KAFKA="false"
   echo
   echo Secret created with postgresql information
 fi

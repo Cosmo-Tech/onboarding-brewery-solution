@@ -16,13 +16,13 @@ parser.add_argument('--csm-organization-id', help='Cosmo Tech Organization ID', 
 parser.add_argument('--csm-workspace-id', help='Cosmo Tech Workspace ID', required=True)
 parser.add_argument('--csm-runner-id', help='Cosmo Tech Runner ID', required=True)
 parser.add_argument('--csm-run-id', help='Cosmo Tech Runner run ID', required=True)
-parser.add_argument('--csm-notify-kafka', help='Send notification to kafka', required=True)
-parser.add_argument('--csm-kafka-broker', help='Kafka broker', required=True)
-parser.add_argument('--csm-kafka-topic', help='Kafka topic', required=True)
-parser.add_argument('--csm-kafka-username', help='Kafka username', required=True)
-parser.add_argument('--csm-kafka-password', help='Kafka password', required=True)
-parser.add_argument('--csm-kafka-ssl', help='Kafka SSL', required=True)
-parser.add_argument('--csm-kafka-ca-pem', help='Kafka CA pem file path', required=True)
+parser.add_argument('--notify-kafka', help='Send notification to kafka', required=True)
+parser.add_argument('--kafka-broker', help='Kafka broker', required=True)
+parser.add_argument('--kafka-topic', help='Kafka topic', required=True)
+parser.add_argument('--kafka-username', help='Kafka username', required=True)
+parser.add_argument('--kafka-password', help='Kafka password', required=True)
+parser.add_argument('--kafka-ssl', help='Kafka SSL', required=True)
+parser.add_argument('--kafka-ca-pem', help='Kafka CA pem file path', required=True)
 
 
 args = parser.parse_args()
@@ -51,5 +51,5 @@ def notifyKafka():
     return
 
 uploadDirectory(args.source_folder,args.s3_bucket_name)
-if args.csm_notify_kafka.lower() == "true":
+if args.notify_kafka.lower() == "true":
     notifyKafka()
