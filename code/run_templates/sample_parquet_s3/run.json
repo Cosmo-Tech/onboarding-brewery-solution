@@ -36,7 +36,14 @@
         "--csm-organization-id", "${CSM_ORGANIZATION_ID}",
         "--csm-workspace-id", "${CSM_WORKSPACE_ID}",
         "--csm-runner-id", "${CSM_RUNNER_ID}",
-        "--csm-run-id", "${CSM_RUN_ID}"
+        "--csm-run-id", "${CSM_RUN_ID}",
+        "--csm-notify-kafka", "${CSM_NOTIFY_KAFKA}",
+        "--csm-kafka-broker", "${CSM_KAFKA_BROKER}",
+        "--csm-kafka-topic", "${CSM_KAFKA_TOPIC}",
+        "--csm-kafka-username", "${CSM_KAFKA_USERNAME}",
+        "--csm-kafka-password", "${CSM_KAFKA_PASSWORD}",
+        "--csm-kafka-ssl", "${CSM_KAFKA_SSL}",
+        "--csm-kafka-ca-pem", "${CSM_KAFKA_CA_PEM}"
       ],
       "useSystemEnvironment":true,
       "precedents":[
