@@ -17,7 +17,9 @@ else
   --from-literal AWS_ENDPOINT_URL=${AWS_ENDPOINT_URL} \
   --from-literal AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
   --from-literal AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
-  --from-literal S3_BUCKET_NAME=${S3_BUCKET_NAME}
+  --from-literal S3_BUCKET_NAME=${S3_BUCKET_NAME} \
+  --from-literal S3_USE_SSL=${S3_USE_SSL} \
+  --from-literal S3_CA_PEM=${S3_CA_PEM}
   echo
   echo Secret created with postgresql information
 fi

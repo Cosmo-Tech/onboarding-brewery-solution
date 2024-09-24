@@ -31,6 +31,8 @@
         "--s3-access-key-id", "${AWS_ACCESS_KEY_ID}",
         "--s3-secret-access-key", "${AWS_SECRET_ACCESS_KEY}",
         "--s3-bucket-name", "${S3_BUCKET_NAME}",
+        "--s3-use-ssl", "${S3_USE_SSL}",
+        "--s3-ca-pem", "${S3_CA_PEM}",
         "--csm-organization-id", "${CSM_ORGANIZATION_ID}",
         "--csm-workspace-id", "${CSM_WORKSPACE_ID}",
         "--csm-runner-id", "${CSM_RUNNER_ID}",
