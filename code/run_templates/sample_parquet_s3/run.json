@@ -41,9 +41,7 @@
         "--kafka-broker", "${KAFKA_BROKER}",
         "--kafka-topic", "${KAFKA_TOPIC}",
         "--kafka-username", "${KAFKA_USERNAME}",
-        "--kafka-password", "${KAFKA_PASSWORD}",
-        "--kafka-ssl", "${KAFKA_SSL}",
-        "--kafka-ca-pem", "${KAFKA_CA_PEM}"
+        "--kafka-password", "${KAFKA_PASSWORD}"
       ],
       "useSystemEnvironment":true,
       "precedents":[

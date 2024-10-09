@@ -1,3 +1,4 @@
-CosmoTech-Acceleration-Library==0.7.0
+cosmotech-run-orchestrator @ git+https://github.com/Cosmo-Tech/run-orchestrator.git@main
+CosmoTech-Acceleration-Library @ git+https://github.com/Cosmo-Tech/CosmoTech-Acceleration-Library.git@main
 psycopg2-binary==2.9.9
 kafka-python-ng==2.2.2
