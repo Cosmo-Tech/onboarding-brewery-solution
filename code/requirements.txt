@@ -1,4 +1,5 @@
+run_templates/report_plugin
 pandas
-cosmotech-run-orchestrator
-cosmotech-api~=3.1.0
+cosmotech-run-orchestrator~=1.5.0
+Cosmotech-Acceleration-Library~=0.8.3
 azure-storage-blob

@@ -1,0 +1,8 @@
+[project]
+name = "brewery-kafk-plugin"
+authors = [{ name = "Cosmo Tech", email = "platform@cosmotech.com" }]
+version = "0.0.1"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cosmotech.*"]

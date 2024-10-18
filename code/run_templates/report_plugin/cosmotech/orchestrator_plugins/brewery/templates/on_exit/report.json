@@ -1,0 +1,8 @@
+{
+  "id": "report",
+  "command": "echo",
+  "arguments": [
+    "Run success state :", "$CSM_ORC_IS_SUCCESS"
+  ],
+  "useSystemEnvironment": "true"
+}

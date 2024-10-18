@@ -57,3 +57,6 @@ runTemplates:
     parametersJson: true
     parametersHandlerSource: local
     csmSimulation: BusinessApp_Simulation
+  - id: "sample_complete"
+    name: "Full sample"
+    csmSimulation: BusinessApp_Simulation

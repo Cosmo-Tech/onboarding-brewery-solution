@@ -1,0 +1,114 @@
+{
+  "commandTemplates": [
+    {
+      "id": "report",
+      "command": "python",
+      "useSystemEnvironment": true,
+      "arguments": [
+        "code/run_templates/sample_complete/report.py"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "id": "PrefillStore",
+      "command": "csm-data",
+      "useSystemEnvironment": true,
+      "arguments": [
+        "store",
+        "load-csv-folder",
+        "--store-folder",
+        "$CSM_TEMP_ABSOLUTE_PATH/tmpstore",
+        "--csv-folder",
+        "code/run_templates/sample_complete/InputDataset"
+      ]
+    },
+    {
+      "id": "InitECS",
+      "command": "csm-data",
+      "useSystemEnvironment": true,
+      "arguments": [
+        "store",
+        "dump-to-s3",
+        "--output-type",
+        "csv",
+        "--store-folder",
+        "$CSM_TEMP_ABSOLUTE_PATH/tmpstore",
+        "--prefix",
+        "$CSM_RUN_ID/inputs/"
+      ],
+      "precedents": [
+        "PrefillStore"
+      ]
+    },
+    {
+      "id": "DownloadDataset",
+      "command": "csm-data",
+      "useSystemEnvironment": true,
+      "arguments": [
+        "s3-bucket-load",
+        "--prefix-filter",
+        "$CSM_RUN_ID/inputs/"
+      ],
+      "precedents": [
+        "InitECS"
+      ]
+    },
+    {
+      "id": "RunSimulation",
+      "command": "main",
+      "arguments": [
+        "-i",
+        "BusinessApp_Simulation"
+      ],
+      "useSystemEnvironment": true,
+      "precedents": [
+        "DownloadDataset"
+      ]
+    },
+    {
+      "id": "LoadResultsInStore",
+      "command": "csm-data",
+      "useSystemEnvironment": true,
+      "arguments": [
+        "store",
+        "load-csv-folder",
+        "--csv-folder",
+        "$CSM_OUTPUT_ABSOLUTE_PATH"
+      ],
+      "precedents": [
+        "RunSimulation"
+      ]
+    },
+    {
+      "id": "SendResultsToPSQL",
+      "command": "csm-data",
+      "useSystemEnvironment": true,
+      "arguments": [
+        "store",
+        "dump-to-postgresql",
+        "--table_prefix",
+        "$CSM_RUN_ID_"
+      ],
+      "precedents": [
+        "LoadResultsInStore"
+      ]
+    },
+    {
+      "id": "SendResultsToECS",
+      "command": "csm-data",
+      "useSystemEnvironment": true,
+      "arguments": [
+        "store",
+        "dump-to-s3",
+        "--output-type",
+        "parquet",
+        "--prefix",
+        "$CSM_RUN_ID/results/"
+      ],
+      "precedents": [
+        "LoadResultsInStore"
+      ]
+    }
+  ]
+}
