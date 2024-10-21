@@ -1,5 +1,6 @@
 run_templates/report_plugin
 pandas
 cosmotech-run-orchestrator~=1.5.0
-Cosmotech-Acceleration-Library~=0.8.3
+Cosmotech-Acceleration-Library~=0.8.4
 azure-storage-blob
+kafka-python-ng==2.2.2

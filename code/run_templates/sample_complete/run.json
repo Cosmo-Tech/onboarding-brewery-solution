@@ -1,17 +1,22 @@
 {
   "commandTemplates": [
     {
-      "id": "report",
+      "id": "on_exit",
       "command": "python",
       "useSystemEnvironment": true,
       "arguments": [
-        "code/run_templates/sample_complete/report.py"
+        "code/run_templates/sample_complete/notify_kafka.py",
+        "--notify-kafka", "${NOTIFY_KAFKA}",
+        "--kafka-broker", "${KAFKA_BROKER}",
+        "--kafka-topic", "${KAFKA_TOPIC}",
+        "--kafka-username", "${KAFKA_USERNAME}",
+        "--kafka-password", "${KAFKA_PASSWORD}"
       ]
     }
   ],
   "steps": [
     {
-      "id": "PrefillStore",
+      "id": "readLocalToStore",
       "command": "csm-data",
       "useSystemEnvironment": true,
       "arguments": [
@@ -24,12 +29,14 @@
       ]
     },
     {
-      "id": "InitECS",
+      "id": "InitECSWithStore",
       "command": "csm-data",
       "useSystemEnvironment": true,
       "arguments": [
         "store",
         "dump-to-s3",
+        "--bucket-name",
+        "inputData",
         "--output-type",
         "csv",
         "--store-folder",
@@ -38,20 +45,22 @@
         "$CSM_RUN_ID/inputs/"
       ],
       "precedents": [
-        "PrefillStore"
+        "readLocalToStore"
       ]
     },
     {
-      "id": "DownloadDataset",
+      "id": "DownloadDatasetFromECS",
       "command": "csm-data",
       "useSystemEnvironment": true,
       "arguments": [
-        "s3-bucket-load",
+        "s3-bucket-download",
+        "--bucket-name",
+        "inputData",
         "--prefix-filter",
         "$CSM_RUN_ID/inputs/"
       ],
       "precedents": [
-        "InitECS"
+        "InitECSWithStore"
       ]
     },
     {
@@ -63,7 +72,7 @@
       ],
       "useSystemEnvironment": true,
       "precedents": [
-        "DownloadDataset"
+        "DownloadDatasetFromECS"
       ]
     },
     {
@@ -87,7 +96,7 @@
       "arguments": [
         "store",
         "dump-to-postgresql",
-        "--table_prefix",
+        "--table-prefix",
         "$CSM_RUN_ID_"
       ],
       "precedents": [
