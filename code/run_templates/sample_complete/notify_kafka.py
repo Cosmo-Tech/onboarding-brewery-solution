@@ -31,10 +31,12 @@ def notifyKafka():
     )
 
     # Produce a message
-    if CSM_ORC_IS_SUCCESS:
-        message = f"Run {CSM_RUN_ID} Success"
+    is_run_success = os.environ['CSM_ORC_IS_SUCCESS']
+    csm_run_id = os.environ['CSM_RUN_ID']
+    if is_run_success.lower() in ['true']:
+        message = f"Run {csm_run_id} Success"
     else:
-        message = f"Run {CSM_RUN_ID} FAIL"
+        message = f"Run {csm_run_id} FAIL"
 
     try:
         LOGGER.debug('send message to producer')
