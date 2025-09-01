@@ -1,3 +1,5 @@
 [General]
 Version=11.0
-Description=
+Description=Generic basic brewery
+[CMakeOptions]
+PROJECT_PYTHON_WRAPPERS=ON

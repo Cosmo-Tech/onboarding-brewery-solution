@@ -1,0 +1,9 @@
+{
+  "steps": [
+    {
+      "id": "DisplayEnv",
+      "command": "python code/run_templates/scripts/display_csm_env.py",
+      "useSystemEnvironment": true
+    }
+  ]
+}
