@@ -33,7 +33,7 @@
       <csmSon:Property name="File">scenariorun-data/Customer.csv</csmSon:Property>
       <csmSon:Property name="IgnoreMissingFile">0</csmSon:Property>
       <csmSon:Property name="NullValues">[]</csmSon:Property>
-      <csmSon:Property name="Query">Name as @Name,
+      <csmSon:Property name="Query">id as @Name,
         Satisfaction,
         SurroundingSatisfaction,
         Thirsty</csmSon:Property>
@@ -47,7 +47,7 @@
       <csmSon:Property name="File">scenariorun-data/Customer.csv</csmSon:Property>
       <csmSon:Property name="IgnoreMissingFile">0</csmSon:Property>
       <csmSon:Property name="NullValues">[]</csmSon:Property>
-      <csmSon:Property name="Query">Name as @VertexName</csmSon:Property>
+      <csmSon:Property name="Query">id as @VertexName</csmSon:Property>
       <csmSon:Property name="StringDelimiter">"</csmSon:Property>
       <csmSon:Property name="UseVertexScope">0</csmSon:Property>
     </csmSon:Loader>
@@ -58,8 +58,8 @@
       <csmSon:Property name="File">scenariorun-data/arc_to_Customer.csv</csmSon:Property>
       <csmSon:Property name="IgnoreMissingFile">0</csmSon:Property>
       <csmSon:Property name="NullValues">[]</csmSon:Property>
-      <csmSon:Property name="Query">source as @SourceName,
-        target as @DestinationName</csmSon:Property>
+      <csmSon:Property name="Query">src as @SourceName,
+        dest as @DestinationName</csmSon:Property>
       <csmSon:Property name="StringDelimiter">"</csmSon:Property>
       <csmSon:Property name="UseVertexScope">0</csmSon:Property>
     </csmSon:Loader>
