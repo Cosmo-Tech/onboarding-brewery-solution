@@ -1,3 +1,6 @@
 Simulation/Output/
 Simulation/Resource/scenariorun-data/
 __pycache__/
+.brewery-solution
+Generated
+.env

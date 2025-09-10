@@ -1,15 +1,15 @@
 {
   "steps": [
     {
-      "id": "UseDefault",
-      "command": "python code/run_templates/scripts/use_default_dataset.py",
-      "useSystemEnvironment": true
+     "id": "load-dataset",
+     "command": "csm-data api scenariorun-load-data",
+     "useSystemEnvironment": true
     },
     {
       "id": "RunSimulator",
       "command": "python code/run_templates/scripts/run_simulator.py",
       "useSystemEnvironment": true,
-      "precedents": ["UseDefault"]
+      "precedents": ["load-dataset"]
     }
   ]
 }

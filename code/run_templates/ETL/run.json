@@ -4,6 +4,24 @@
       "id": "DisplayEnv",
       "command": "python code/run_templates/scripts/display_csm_env.py",
       "useSystemEnvironment": true
+    },
+    {
+       "id": "get-parameters",
+       "command": "csm-data api run-load-data",
+       "useSystemEnvironment": true,
+       "precedents": ["DisplayEnv"]
+    },
+    {
+      "id": "generate-data",
+      "command": "python code/run_templates/scripts/generate_data.py",
+      "useSystemEnvironment": true,
+      "precedents": ["get-parameters"]
+    },
+    {
+     "id": "send-files",
+     "command": "csm-data api tdl-send-files",
+     "precedents": [ "generate-data" ],
+     "useSystemEnvironment": true
     }
   ]
 }
